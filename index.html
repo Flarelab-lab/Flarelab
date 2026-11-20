@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dorothy Gaynor × Flare Lab · Prueba de calidad</title>
+<meta name="description" content="Prueba de calidad Flare Lab: productos de Dorothy Gaynor en foto de tienda, de temporada y con modelo, creadas por Flare Lab a partir de su foto de catálogo.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A0D14">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@500;700&display=swap">
+<style>
+:root{
+  --noche:#0A0D14; --noche-2:#10141D; --noche-3:#171C27; --linea:#222937; --linea-2:#2E3646;
+  --papel:#F2F0EC; --gris:#9AA3B5; --texto:#C9D0DD; --hielo:#A9C6FF; --azul:#3D7BFF; --naranja:#D9420F; --naranja-2:#EE5320;
+  --crema:#EFE7DA; --cafe:#4A3B2E;
+  --sans:"Manrope","Segoe UI",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace; --dgf:"Playfair Display",Georgia,serif;
+  --pad:clamp(16px,4.5vw,56px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--noche);color:var(--texto);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+h1,h2{color:var(--papel);font-weight:700;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5.4vw,4.3rem)}
+h2{font-size:clamp(1.7rem,3.6vw,2.8rem);font-weight:600}
+em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--hielo)}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:max(var(--pad),env(safe-area-inset-left))}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gris)}
+.lead{font-size:clamp(1.02rem,1.7vw,1.2rem);color:var(--texto);max-width:40em;font-weight:300}
+.lead b{color:var(--papel);font-weight:600}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,13,20,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px}
+.brand{display:flex;align-items:center;gap:8px;font-size:21px;color:var(--papel);line-height:1;text-decoration:none}
+.brand svg{width:30px;height:30px}
+.brand .f{font-weight:800;letter-spacing:-.045em}.brand .l{font-family:var(--serif);font-style:italic;color:var(--hielo)}
+.x{color:var(--gris);font-weight:300;margin:0 4px}
+.dg{font-family:var(--dgf);font-weight:500;letter-spacing:.14em;font-size:.78rem;color:var(--papel)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 24px;border-radius:2px;background:var(--naranja);color:#fff;font-weight:700;font-size:.98rem;text-decoration:none;transition:background .15s,transform .15s;white-space:nowrap}
+.btn:hover{background:var(--naranja-2);transform:translateY(-1px)}
+.btn.line{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1px var(--linea-2)}
+.btn.small{min-height:40px;padding:0 16px;font-size:.86rem}
+:focus-visible{outline:2px solid var(--hielo);outline-offset:3px}
+/* ETIQUETAS DE ORIGEN: la clave de la página */
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;line-height:1;padding:7px 10px 7px 8px;border-radius:2px;white-space:nowrap}
+.tag svg{width:15px;height:15px;flex:none}
+.tag-dg{background:var(--crema);color:var(--cafe);box-shadow:0 0 0 1px rgba(74,59,46,.25)}
+.tag-dg i{width:8px;height:8px;border-radius:50%;background:var(--cafe);flex:none}
+.tag-fl{background:rgba(10,13,20,.86);color:var(--papel);box-shadow:inset 0 0 0 1px rgba(217,66,15,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.frame .tag{position:absolute;left:10px;top:10px;z-index:3;pointer-events:none;max-width:calc(100% - 20px)}
+.tag .sh{display:none}
+/* portada */
+.hero{position:relative;padding:clamp(40px,7vw,96px) 0 clamp(40px,6vw,72px)}
+.hero::before,.hero::after{content:"";position:absolute;left:0;right:0;height:10px;background:#000}
+.hero::before{top:0}.hero::after{bottom:0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.hero-copy{display:grid;gap:22px}
+.legend{display:grid;gap:10px;border:1px solid var(--linea);background:var(--noche-2);padding:18px}
+.legend .eyebrow{color:var(--papel)}
+.legend-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}
+.legend-row p{font-size:.95rem;color:var(--texto)}
+.legend-row p b{color:var(--papel);font-weight:600}
+.hero-mosaic{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:10px;aspect-ratio:1/1}
+.hero-mosaic .frame{aspect-ratio:auto;height:100%}
+.hero-mosaic .frame:first-child{grid-row:1/3}
+.hero-mosaic .frame:not(:first-child) .tag .lg{display:none}.hero-mosaic .frame:not(:first-child) .tag .sh{display:inline}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+/* qué resuelve */
+.solve{margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea)}
+.solve li{list-style:none;background:var(--noche);padding:22px;display:grid;gap:6px;align-content:start}
+.solve li span{font-family:var(--mono);font-size:.72rem;color:var(--hielo);letter-spacing:.12em}
+.solve b{color:var(--papel);font-weight:600;font-size:1.05rem;line-height:1.3}
+.solve p{color:var(--gris);font-size:.94rem}
+section{position:relative;padding:clamp(56px,8vw,104px) 0}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(26px,4vw,44px);max-width:52em}
+/* producto */
+.product{padding:clamp(30px,4.5vw,52px) 0;border-top:1px solid var(--linea);display:grid;gap:20px}
+.p-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.p-name{font-family:var(--dgf);font-weight:500;color:var(--papel);font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:.01em}
+.p-color{color:var(--gris);font-size:.95rem}
+.p-num{font-family:var(--mono);font-size:.72rem;color:var(--hielo);letter-spacing:.14em;margin-right:4px}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,2.2fr);gap:14px;align-items:start}
+.col{display:grid;gap:12px}
+.col-label{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);min-height:28px}
+.col-label b{color:var(--papel);font-weight:500}
+.col.in{padding:12px;background:rgba(239,231,218,.05);border:1px dashed rgba(239,231,218,.28)}
+.col.out{padding:12px;border:1px solid rgba(217,66,15,.45);background:linear-gradient(180deg,rgba(217,66,15,.06),transparent 40%)}
+.arrow{align-self:center;display:grid;place-items:center;color:var(--naranja);font-size:1.6rem;line-height:1}
+.outs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.mod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px;align-items:end;padding:12px;border:1px solid var(--linea);background:var(--noche-2)}
+.mod .p-name{font-size:1.15rem}
+.mod-head{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+@media (max-width:1060px){.mods{grid-template-columns:minmax(0,1fr)}}
+figure{margin:0;display:grid;gap:8px;align-content:start}
+figcaption{display:grid;gap:2px}
+figcaption .k{font-weight:600;color:var(--papel);font-size:.92rem;line-height:1.3}
+figcaption .d{color:var(--gris);font-size:.82rem;line-height:1.35}
+.frame{position:relative;overflow:hidden;background:#fff;cursor:zoom-in;aspect-ratio:4/5}
+.frame img{width:100%;height:100%;object-fit:cover}
+.frame.contain img{object-fit:contain;padding:4%}
+.lens{position:absolute;width:220px;height:220px;border-radius:50%;pointer-events:none;opacity:0;transform:scale(.85);transition:opacity .18s,transform .18s;z-index:4;
+  background-repeat:no-repeat;background-color:#fff;box-shadow:0 0 0 1.5px rgba(169,198,255,.9),0 20px 50px rgba(0,0,0,.45)}
+.frame.on .lens{opacity:1;transform:scale(1)}
+.zoomhint{position:absolute;right:10px;bottom:10px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(10,13,20,.7);display:grid;place-items:center;pointer-events:none}
+.zoomhint svg{width:14px;height:14px}
+.swipe{display:none;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+/* instagram */
+.ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;background:#111}
+.post img{width:100%;height:100%;object-fit:cover}
+.post .t{position:absolute;inset:0;padding:9% 8%;display:flex;flex-direction:column;pointer-events:none}
+.post .tag{position:absolute;left:8px;bottom:8px;font-size:.56rem;padding:5px 7px}
+.must .m1{font-family:"Cormorant Garamond",serif;font-weight:400;color:#8C6A3C;font-size:clamp(2.2rem,4.6vw,4rem);line-height:.9;letter-spacing:.06em}
+.must .m2{font-family:var(--dgf);color:#8C6A3C;letter-spacing:.32em;font-size:clamp(.66rem,1.1vw,.9rem);margin-top:6px}
+.shade-top{background:linear-gradient(180deg,rgba(0,0,0,.5),transparent 42%)}
+.shade-bot{justify-content:flex-end;padding-bottom:17%!important;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 45%)}
+.serif-caps{font-family:var(--dgf);font-weight:700;color:#fff;font-size:clamp(1rem,1.8vw,1.45rem);letter-spacing:.05em;text-transform:uppercase;line-height:1.1;text-align:center}
+.small-caps{color:#fff;opacity:.9;font-size:clamp(.55rem,.85vw,.68rem);letter-spacing:.16em;text-transform:uppercase;margin-top:8px;text-align:center}
+.inv-t{font-family:var(--dgf);color:#fff;font-size:clamp(.9rem,1.5vw,1.2rem);line-height:1.15;letter-spacing:.06em;text-transform:uppercase;max-width:9em}
+.ig-note{margin-top:14px;color:var(--gris);font-size:.88rem}
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{border:1px solid var(--linea);padding:22px;display:grid;gap:8px;align-content:start;counter-increment:s}
+.steps li::before{content:"0" counter(s);font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--hielo)}
+.steps h3{color:var(--papel);font-size:1.1rem;font-weight:600;margin:0}
+.steps p{color:var(--gris);font-size:.95rem}
+/* cierre */
+.close{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:center;border:1px solid var(--linea);padding:clamp(22px,4vw,48px);background:linear-gradient(135deg,rgba(61,123,255,.06),rgba(217,66,15,.05))}
+.close ul{margin:14px 0 0;padding-left:18px;display:grid;gap:6px}
+.close .cta{display:grid;gap:12px;justify-items:start}
+.contact{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--papel)}
+footer{border-top:1px solid var(--linea);padding:22px 0 calc(22px + env(safe-area-inset-bottom))}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.tagline{font-family:var(--serif);font-style:italic;color:var(--papel)}
+.legal{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+/* visor */
+.viewer{position:fixed;inset:0;z-index:95;background:rgba(5,7,11,.97);display:none;flex-direction:column}
+.viewer.open{display:flex}
+.vbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px max(16px,env(safe-area-inset-left));border-bottom:1px solid var(--linea)}
+.vbar .vt{display:grid;gap:6px;min-width:0}
+.vbar .vt span:last-child{color:var(--papel);font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vclose{background:transparent;border:1px solid var(--linea-2);color:var(--papel);font:600 .9rem var(--sans);padding:10px 16px;border-radius:2px;cursor:pointer;min-height:44px}
+.vscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+.vscroll img{max-width:none;width:220%;height:auto;margin:auto}
+.vhint{padding:8px 16px calc(10px + env(safe-area-inset-bottom));text-align:center;color:var(--gris);font-size:.85rem}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px max(16px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));background:rgba(10,13,20,.94);border-top:1px solid var(--linea);display:none}
+.sticky .btn{width:100%}
+@media (max-width:1060px){
+  .ig{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .arrow{transform:rotate(90deg);height:28px}
+  .col.in{grid-template-columns:minmax(0,180px) minmax(0,1fr);align-items:center;column-gap:16px}
+  .col.in .col-label{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .hero-grid,.close{grid-template-columns:minmax(0,1fr)}
+  .hero-mosaic{max-width:560px}
+  .solve{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .nav .btn{display:none}
+}
+@media (max-width:640px){
+  .outs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-12px;padding-inline:12px;scroll-padding-inline:12px}
+  .outs::-webkit-scrollbar{display:none}
+  .outs figure{scroll-snap-align:start}
+  .swipe{display:block}
+  .col.in{grid-template-columns:minmax(0,130px) minmax(0,1fr)}
+  .legend-row{grid-template-columns:minmax(0,1fr);gap:8px}
+  .legend-row .tag{justify-self:start}
+  .dg,.x{display:none}
+  .mod{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr)}
+  .frame .tag .lg,.post .tag .lg{display:none}.frame .tag .sh,.post .tag .sh{display:inline}
+  .frame .tag{left:6px;top:6px;font-size:.56rem;letter-spacing:.06em;padding:6px 7px 6px 6px}
+}
+@media (hover:none){.lens{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gS" x1="0" x2="1"><stop offset="0" stop-color="#3D7BFF" stop-opacity="0"/><stop offset=".28" stop-color="#3D7BFF" stop-opacity=".95"/><stop offset=".5" stop-color="#F2F6FF"/><stop offset=".72" stop-color="#3D7BFF" stop-opacity=".95"/><stop offset="1" stop-color="#3D7BFF" stop-opacity="0"/></linearGradient>
+<radialGradient id="gL"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FFE3D6"/><stop offset="1" stop-color="#D9420F"/></radialGradient>
+<radialGradient id="gG"><stop offset="0" stop-color="#FFB08A" stop-opacity=".9"/><stop offset=".35" stop-color="#D9420F" stop-opacity=".35"/><stop offset="1" stop-color="#D9420F" stop-opacity="0"/></radialGradient>
+<filter id="bl"><feGaussianBlur stdDeviation="1.6"/></filter></defs>
+<symbol id="m" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="url(#gG)"/><rect x="0" y="47.6" width="100" height="4.8" rx="2.4" fill="url(#gS)" filter="url(#bl)" opacity=".8"/><rect x="0" y="48.6" width="100" height="2.8" rx="1.4" fill="url(#gS)"/><circle cx="50" cy="50" r="13" fill="url(#gL)"/><circle cx="50" cy="50" r="5" fill="#fff"/><circle cx="71" cy="64" r="5.5" fill="none" stroke="#D9420F" stroke-width="2"/><circle cx="80" cy="70" r="2.4" fill="#3D7BFF"/></symbol>
+<symbol id="lupa" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#F2F0EC" stroke-width="2"/><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6" stroke="#F2F0EC" stroke-width="2" stroke-linecap="round"/></symbol></svg>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Flare Lab para Dorothy Gaynor"><svg viewBox="0 0 100 100"><use href="#m"/></svg><span class="f">flare</span><span class="l">lab</span><span class="x">×</span><span class="dg">DOROTHY GAYNOR</span></a>
+  <a class="btn small" href="https://calendly.com/alan-flarelab/30min" target="_blank" rel="noopener">Agendar 20 min</a>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
+    <p class="eyebrow">Prueba de calidad Flare Lab · Dorothy Gaynor</p>
+    <h1>Su calzado en fotos de campaña, <em>sin sesión de fotos</em>.</h1>
+    <p class="lead">De cada producto usamos <b>solo su foto de catálogo</b>. Flare Lab creó todo lo demás: la modelo, la locación, la luz y la foto de tienda. El producto no se redibuja: es el mismo de su foto.</p>
+    <div class="legend" role="note" aria-label="Cómo distinguir las fotos">
+      <p class="eyebrow">Cada foto de esta página lleva una etiqueta</p>
+      <div class="legend-row"><span class="tag tag-dg"><i></i>Foto de Dorothy Gaynor</span><p><b>Su foto original</b> del catálogo. Es lo único que usamos.</p></div>
+      <div class="legend-row"><span class="tag tag-fl"><svg viewBox="0 0 100 100"><use href="#m"/></svg>Hecha por Flare Lab</span><p><b>Foto nueva</b> que creamos con IA a partir de la suya.</p></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="#productos">Ver los productos</a>
+      <a class="btn line" href="https://calendly.com/alan-flarelab/30min" target="_blank" rel="noopener">Agendar 20 minutos</a>
+    </div>
+  </div>
+  <div class="hero-mosaic rv" id="mosaic"></div>
+</div></div>
+
+<section style="padding:clamp(28px,4vw,48px) 0 0"><div class="wrap">
+  <ul class="solve rv">
+    <li><span>01</span><b>Fotos con modelo para cada lanzamiento</b><p>Sin casting, locación, producción ni fechas de sesión.</p></li>
+    <li><span>02</span><b>El producto es idéntico al real</b><p>Mismo color, costuras y herrajes. Acérquese a cualquier foto para comprobarlo.</p></li>
+    <li><span>03</span><b>Listas para publicar</b><p>Fondo blanco de 3000 px para su tienda y formato vertical 4:5 para Instagram.</p></li>
+  </ul>
+</div></section>
+
+<section id="productos"><div class="wrap">
+  <div class="sec-head rv">
+    <p class="eyebrow">Producto por producto</p>
+    <h2>Primero su foto. Después, <em>lo que entregamos</em>.</h2>
+    <p class="lead">Con una sola foto de catálogo producimos dos fotos por producto: una de temporada y una para su tienda en fondo blanco. Pase el cursor para ver el detalle; en celular, toque la foto para abrirla en grande.</p>
+  </div>
+  <div id="lista"></div>
+</div></section>
+
+<section id="modelo" style="padding-top:0"><div class="wrap">
+  <div class="sec-head rv">
+    <p class="eyebrow">Con modelo</p>
+    <h2>Su producto, puesto y <em>en la calle</em>.</h2>
+    <p class="lead">Otros cuatro productos de su catálogo en fotos de campaña con modelo. A la izquierda, su foto; a la derecha, la que creamos.</p>
+  </div>
+  <div class="mods" id="mods"></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="sec-head rv">
+    <p class="eyebrow">Así se verían en su Instagram</p>
+    <h2>Con la identidad de <em>Dorothy Gaynor</em>.</h2>
+    <p class="lead">Seguimos sus propias series: calles de México, el otoño en la ciudad, los bodegones de “MUST DOROTHY” y la guía de botines de invierno.</p>
+  </div>
+  <div class="ig" id="ig"></div>
+  <p class="ig-note">Los textos sobre las fotos son de ejemplo, con la tipografía y el tono de sus publicaciones.</p>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="sec-head rv"><p class="eyebrow">Cómo lo hacemos</p><h2>El producto nunca se <em>redibuja</em>.</h2></div>
+  <ol class="steps">
+    <li class="rv"><h3>Partimos de su foto oficial</h3><p>Usamos la foto de su catálogo a máxima resolución (3000 px).</p></li>
+    <li class="rv"><h3>Creamos la escena alrededor</h3><p>Modelo, locación y luz se generan con el estilo de su marca. El producto que aparece es el pixel real de su foto.</p></li>
+    <li class="rv"><h3>Revisamos cada detalle</h3><p>Comparamos costuras, herrajes y color contra su foto, con zoom, antes de entregar.</p></li>
+  </ol>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <a class="brand" href="#top" style="font-size:18px"><svg viewBox="0 0 100 100"><use href="#m"/></svg><span class="f">flare</span><span class="l">lab</span></a>
+  <span class="tagline">Hecho con IA. Visto como cine.</span>
+  <span class="legal">Fotos con etiqueta Flare Lab: hechas con IA a partir de su catálogo · uso privado</span>
+</div></footer>
+
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Foto en grande">
+  <div class="vbar"><div class="vt"><span id="vtag"></span><span id="vtitle"></span></div><button class="vclose" id="vclose">Cerrar</button></div>
+  <div class="vscroll" id="vscroll"><img id="vimg" alt=""></div>
+  <p class="vhint">Deslice para recorrer la foto a tamaño real.</p>
+</div>
+
+<script>
+(function(){
+  const TAG_DG='<span class="tag tag-dg"><i></i><span class="lg">Foto de Dorothy Gaynor</span><span class="sh">Dorothy Gaynor</span></span>';
+  const TAG_FL='<span class="tag tag-fl"><svg viewBox="0 0 100 100"><use href="#m"/></svg><span class="lg">Hecha por Flare Lab</span><span class="sh">Flare Lab</span></span>';
+  const P=[
+    {k:"ariana",n:"Botín Ariana",c:"Latte",m:"Portales del Centro Histórico, CDMX",t:"Estilo “MUST DOROTHY” · pedestal de travertino"},
+    {k:"luz",n:"Bota Luz",c:"Cognac",m:"Escalinata de cantera, Guanajuato",t:"Calle de Guanajuato · bodegón"},
+    {k:"lorna",n:"Botín Lorna",c:"Camel",m:"Calle empedrada de noche · cempasúchil",t:"Terracota · sol de tarde"},
+    {k:"elish",n:"Botín Elish",c:"Negro",m:"Escalinata en Coyoacán · mañana de invierno",t:"Guía de invierno · tejido y luz de ventana"}
+  ];
+  const W={modelo:[900,1117],temporada:[900,1125],blanco:[900,900],catalogo:[900,900]};
+  function frame(p,t,tag,cls,title,lazy){
+    return '<div class="frame '+(cls||'')+'" data-hd="img/hd/'+p.k+'_'+t+'.jpg" data-title="'+p.n+' '+p.c+' · '+title+'" data-src="'+(t==='catalogo'?'dg':'fl')+'">'+
+      '<img src="img/'+p.k+'_'+t+'.jpg" alt="'+p.n+' '+p.c+': '+title+'"'+(lazy===false?' fetchpriority="high"':' loading="lazy"')+' width="'+W[t][0]+'" height="'+W[t][1]+'">'+
+      tag+'<span class="zoomhint" aria-hidden="true"><svg><use href="#lupa"/></svg></span><div class="lens"></div></div>';
+  }
+  function fig(p,t,tag,cls,k,d){return '<figure>'+frame(p,t,tag,cls,k)+'<figcaption><span class="k">'+k+'</span><span class="d">'+d+'</span></figcaption></figure>'}
+  // portada
+  const MOD=[
+    {k:"giana",n:"Bolsa Giana",c:"Oro",d:"Noche en Polanco"},
+    {k:"cognac",n:"Bota Ariana",c:"Cognac",d:"Otoño en la Condesa"},
+    {k:"niki",n:"Botín Niki",c:"Negro",d:"Escalinata de concreto"},
+    {k:"monica",n:"Bolsa Monica",c:"Negra",d:"Mañana en Reforma"}
+  ];
+  document.getElementById('mosaic').innerHTML=[MOD[0],MOD[1],MOD[3]].map(p=>frame(p,'modelo',TAG_FL,'','Foto con modelo',false)).join('');
+  document.getElementById('mods').innerHTML=MOD.map(p=>'<article class="mod rv"><div class="mod-head"><h3 class="p-name">'+p.n+'</h3><span class="p-color">Color '+p.c+'</span></div>'+
+    fig(p,'catalogo',TAG_DG,'contain','Su foto de catálogo','La única foto que usamos.')+fig(p,'modelo',TAG_FL,'','Con modelo',p.d)+'</article>').join('');
+  // productos
+  const lista=document.getElementById('lista');
+  P.forEach((p,i)=>{
+    const el=document.createElement('article'); el.className='product rv';
+    el.innerHTML='<div class="p-head"><span class="p-num">0'+(i+1)+' / 04</span><h3 class="p-name">'+p.n+'</h3><span class="p-color">Color '+p.c+'</span></div>'+
+      '<div class="flow">'+
+        '<div class="col in"><p class="col-label"><b>1 · Lo que nos dieron</b></p>'+fig(p,'catalogo',TAG_DG,'contain','Su foto de catálogo','La única foto que usamos.')+'</div>'+
+        '<div class="arrow" aria-hidden="true">→</div>'+
+        '<div class="col out"><p class="col-label"><b>2 · Lo que entrega Flare Lab</b><span class="swipe">· deslice →</span></p><div class="outs">'+
+          fig(p,'temporada',TAG_FL,'','De temporada',p.t)+
+          fig(p,'blanco',TAG_FL,'contain','Para su tienda','Fondo blanco · 3000 px')+
+        '</div></div>'+
+      '</div>';
+    lista.appendChild(el);
+  });
+  // instagram
+  const ig=[
+    {k:'luz',t:'temporada',h:'<div class="t shade-top"><span class="serif-caps">Caminos que se quedan.</span><span class="small-caps">Bota Luz · Cognac</span></div>'},
+    {k:'cognac',t:'modelo',h:'<div class="t shade-top"><span class="serif-caps">Pasos firmes que permanecen</span><span class="small-caps">Bota Ariana · Cognac</span></div>'},
+    {k:'ariana',t:'temporada',h:'<div class="t must"><span class="m1">MUST</span><span class="m2">DOROTHY</span></div>'},
+    {k:'elish',t:'temporada',h:'<div class="t shade-bot"><span class="inv-t">Tu guía de botines invernales</span><span class="small-caps" style="text-align:left">Botín Elish · Negro</span></div>'}
+  ];
+  document.getElementById('ig').innerHTML=ig.map(x=>'<div class="post rv"><img src="img/'+x.k+'_'+x.t+'.jpg" alt="" loading="lazy" width="900" height="1125">'+x.h+TAG_FL+'</div>').join('');
+  // lupa (escritorio): calcula el rectángulo real de la imagen (cover o contain)
+  const hover=matchMedia('(hover:hover)').matches;
+  function rect(fr,img){
+    const r=fr.getBoundingClientRect(), cs=getComputedStyle(img), fit=cs.objectFit, pad=parseFloat(cs.paddingLeft)||0;
+    const bw=r.width-2*pad, bh=r.height-2*pad, ir=img.naturalWidth/img.naturalHeight, br=bw/bh;
+    let w,h; if((fit==='contain')===(ir>br)){w=bw;h=bw/ir}else{h=bh;w=bh*ir}
+    return {r, x:pad+(bw-w)/2, y:pad+(bh-h)/2, w, h};
+  }
+  document.querySelectorAll('.frame').forEach(fr=>{
+    const lens=fr.querySelector('.lens'), img=fr.querySelector('img'); let nw=0;
+    function load(){ if(nw) return; const hd=new Image(); hd.onload=()=>{nw=hd.naturalWidth}; hd.src=fr.dataset.hd; lens.style.backgroundImage="url('"+fr.dataset.hd+"')"; }
+    if(hover){
+      fr.addEventListener('mouseenter',()=>{load(); fr.classList.add('on')});
+      fr.addEventListener('mouseleave',()=>fr.classList.remove('on'));
+      fr.addEventListener('mousemove',e=>{
+        const q=rect(fr,img), x=e.clientX-q.r.left, y=e.clientY-q.r.top, L=lens.offsetWidth;
+        lens.style.left=(x-L/2)+'px'; lens.style.top=(y-L/2)+'px';
+        if(!nw) return;
+        const z=Math.max(nw/q.w,2.2), bw=q.w*z, bh=q.h*z;
+        lens.style.backgroundSize=bw+'px '+bh+'px';
+        lens.style.backgroundPosition=(L/2-(x-q.x)*z)+'px '+(L/2-(y-q.y)*z)+'px';
+      });
+    }
+    fr.addEventListener('click',()=>openV(fr));
+  });
+  // visor
+  const V=document.getElementById('viewer'), VI=document.getElementById('vimg'), VS=document.getElementById('vscroll');
+  function openV(fr){
+    VI.src=fr.dataset.hd; VI.alt=fr.dataset.title; document.getElementById('vtitle').textContent=fr.dataset.title;
+    document.getElementById('vtag').innerHTML=fr.dataset.src==='dg'?TAG_DG:TAG_FL;
+    V.classList.add('open'); document.body.style.overflow='hidden'; document.getElementById('vclose').focus();
+    VI.onload=()=>{VS.scrollLeft=(VI.scrollWidth-VS.clientWidth)/2; VS.scrollTop=(VI.scrollHeight-VS.clientHeight)/2};
+  }
+  function closeV(){V.classList.remove('open'); document.body.style.overflow=''; VI.removeAttribute('src')}
+  document.getElementById('vclose').onclick=closeV;
+  addEventListener('keydown',e=>{if(e.key==='Escape')closeV()});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.06});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
