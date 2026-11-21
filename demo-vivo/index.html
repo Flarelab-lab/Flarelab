@@ -3,95 +3,153 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Flare Lab · Demo en vivo</title>
-<meta name="theme-color" content="#0A0D14">
+<title>Flare Lab · IA vs IA</title>
+<meta name="theme-color" content="#05070A">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-:root{--noche:#0A0D14;--noche-2:#11161F;--linea:#253046;--papel:#F2F0EC;--gris:#9AA3B5;--texto:#CDD4E0;--hielo:#A9C6FF;--azul:#3D7BFF;--naranja:#D9420F;--naranja-2:#EE5320;
---sans:"Manrope",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+:root{--bg:#05070A;--bg2:#0A0E14;--panel:#0D121A;--line:#1A2330;--line2:#2A3648;--txt:#C3CCD9;--hi:#F3F6FA;--mut:#6F7B8D;
+--acc:#4D8DFF;--acc2:#8FB8FF;--fl:#FF5A1F;--fl2:#FF8A4C;--ok:#3DDC97;--bad:#FF4D5E;
+--sans:"Space Grotesk",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--noche);color:var(--texto);font:400 16px/1.5 var(--sans);min-height:100%}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.45 var(--sans);min-height:100%}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+background-image:linear-gradient(rgba(77,141,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(77,141,255,.05) 1px,transparent 1px);background-size:28px 28px;background-attachment:fixed}
+body:before{content:"";position:fixed;inset:-20% -20% auto;height:60vh;background:radial-gradient(closest-side,rgba(77,141,255,.16),transparent);pointer-events:none;z-index:0}
 img{display:block;max-width:100%}
 button,input{font:inherit}
-.app{max-width:560px;margin:0 auto;padding:16px 16px 40px;display:grid;gap:18px}
-header{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
-.brand{display:flex;align-items:center;gap:8px;font-size:21px;color:var(--papel);line-height:1}
-.brand svg{width:28px;height:28px}.brand .f{font-weight:800;letter-spacing:-.045em}.brand .l{font-family:var(--serif);font-style:italic;color:var(--hielo)}
-.cred{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--gris);border:1px solid var(--linea);padding:5px 8px;border-radius:2px;background:transparent}
-h1{margin:0;color:var(--papel);font-size:30px;line-height:1.05;letter-spacing:-.04em;font-weight:800}
-h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--hielo)}
-h2{margin:0;color:var(--papel);font-size:22px;letter-spacing:-.03em;font-weight:700}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--hielo);margin:0}
-.muted{color:var(--gris);font-size:14px;margin:0}
-.card{border:1px solid var(--linea);background:var(--noche-2);padding:16px;display:grid;gap:12px}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 20px;border:0;border-radius:3px;background:var(--naranja);color:#fff;font-weight:800;font-size:17px;cursor:pointer;width:100%;text-decoration:none}
-.btn:active{transform:scale(.99);background:var(--naranja-2)}
-.btn.line{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1px var(--linea)}
-.btn.small{min-height:44px;font-size:15px}
-.btn.wa{background:#1F8F55}
-.btn:disabled{opacity:.45}
-.field{display:grid;gap:6px}
-.field label{font-size:13px;color:var(--gris)}
-.field input,.row input{background:var(--noche);border:1px solid var(--linea);color:var(--papel);padding:13px 12px;border-radius:3px;width:100%;min-width:0}
-.field input.req{border-color:rgba(217,66,15,.7)}
-.slots{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:8px}
-.slot{position:relative;aspect-ratio:3/4;border:1.5px dashed rgba(169,198,255,.45);background:rgba(61,123,255,.06);border-radius:3px;display:grid;place-items:center;text-align:center;padding:8px;cursor:pointer;overflow:hidden;color:var(--papel)}
-.slot.req{border-color:rgba(217,66,15,.75);background:rgba(217,66,15,.08)}
-.slot svg{width:30px;height:30px;margin:0 auto}.slot b{display:block;font-size:13px;margin-top:4px}.slot small{display:block;font-size:11px;color:var(--gris);line-height:1.3}
+.app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:14px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.app section,#proc,#resul{grid-template-columns:minmax(0,1fr)}
+html,body{overflow-x:hidden}
+header{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:9px;color:var(--hi);font-weight:700;letter-spacing:.02em;font-size:17px}
+.brand svg{width:26px;height:26px}.brand small{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:.14em;font-weight:500;border-left:1px solid var(--line2);padding-left:9px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--acc2);border:1px solid var(--line2);padding:6px 9px;border-radius:999px;background:rgba(13,18,26,.8);display:inline-flex;gap:6px;align-items:center}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.kick{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc2);margin:0;display:flex;align-items:center;gap:8px}
+.kick:before{content:"";width:18px;height:1px;background:var(--acc)}
+h1{margin:0;color:var(--hi);font-size:36px;line-height:1;letter-spacing:-.035em;font-weight:700}
+h1 .g,h2 .g{background:linear-gradient(90deg,var(--acc2),var(--fl2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:0;color:var(--hi);font-size:24px;letter-spacing:-.03em;font-weight:700;line-height:1.1}
+.muted{color:var(--mut);font-size:14px;margin:0}
+.panel{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,rgba(13,18,26,.92),rgba(10,14,20,.92));padding:16px;display:grid;gap:12px;border-radius:14px}
+.btn{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 20px;border:0;border-radius:12px;background:linear-gradient(90deg,var(--acc),#6A5BFF 55%,var(--fl));color:#fff;font-weight:700;font-size:17px;letter-spacing:.01em;cursor:pointer;width:100%;text-decoration:none;box-shadow:0 8px 30px -8px rgba(106,91,255,.6)}
+.btn:active{transform:scale(.99)}
+.btn.line{background:transparent;color:var(--hi);box-shadow:inset 0 0 0 1px var(--line2)}
+.btn.small{min-height:46px;font-size:15px;border-radius:10px}
+.btn.wa{background:#1F8F55;box-shadow:none}
+.btn:disabled{opacity:.35;box-shadow:none}
+.field{display:grid;gap:7px}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+input[type=text],input[type=tel],input[type=email],input[type=password],input:not([type]){background:rgba(5,7,10,.7);border:1px solid var(--line2);color:var(--hi);padding:14px 13px;border-radius:10px;width:100%;min-width:0;outline:none}
+input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(77,141,255,.18)}
+input.req{border-color:rgba(255,90,31,.6)}
+.slots{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr);gap:8px}
+.field label.slot{font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none}
+.slot{position:relative;aspect-ratio:3/4;border:1px dashed rgba(143,184,255,.4);background:rgba(77,141,255,.05);border-radius:12px;display:grid;place-items:center;text-align:center;padding:8px;cursor:pointer;overflow:hidden;color:var(--hi)}
+.slot.req{border-color:rgba(255,90,31,.7);background:rgba(255,90,31,.06)}
+.slot svg{width:28px;height:28px;margin:0 auto}.slot b{display:block;font-size:13px;margin-top:4px}.slot small{display:block;font-size:10.5px;color:var(--mut);line-height:1.3}
 .slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slot .x{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(10,13,20,.85);color:#fff;z-index:2}
-.slot .tg{position:absolute;left:4px;bottom:4px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.06em;background:rgba(10,13,20,.85);padding:3px 5px;color:var(--papel)}
-.out{border:1px solid var(--linea);background:var(--noche-2);overflow:hidden}
-.out .hd{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--linea)}
-.out .hd b{color:var(--papel);font-size:16px}.out .hd span{font-family:var(--mono);font-size:11px;color:var(--gris)}
-.out .img{position:relative;aspect-ratio:4/5;background:linear-gradient(110deg,#11161F 30%,#1A2232 50%,#11161F 70%);background-size:200% 100%;animation:sh 1.6s linear infinite;display:grid;place-items:center}
-.out.cat .img{aspect-ratio:1}
-.out .img img{width:100%;height:100%;object-fit:cover}
-.out.cat .img img{object-fit:contain;background:#fff}
-.out .img .st{color:var(--gris);font-size:14px;text-align:center;padding:20px;margin:0}
-.out.done .img{animation:none;background:#000}.out.cat.done .img{background:#fff}
-.out .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
-@keyframes sh{to{background-position:-200% 0}}
-.talk{border-left:2px solid var(--hielo);padding:6px 0 6px 12px;color:var(--papel);font-size:15px;min-height:52px;margin:0;transition:opacity .4s}
-.qr{background:#fff;padding:14px;justify-self:center;border-radius:4px;min-height:258px;min-width:258px;display:grid;place-items:center}
+.slot .x{position:absolute;top:5px;right:5px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(5,7,10,.85);color:#fff;z-index:2}
+.slot .tg{position:absolute;left:5px;bottom:5px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.06em;background:rgba(5,7,10,.85);padding:3px 6px;border-radius:4px;color:var(--hi)}
+.cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;border:1px solid var(--line2);background:rgba(5,7,10,.7);color:var(--txt);border-radius:999px;padding:8px 13px;font-size:13.5px;cursor:pointer}
+.cats button.on{border-color:var(--acc);background:rgba(77,141,255,.16);color:var(--hi)}
+.vs3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.vs3 div{border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;background:rgba(5,7,10,.5)}
+.vs3 b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--hi)}.vs3 span{font-size:11px;color:var(--mut);line-height:1.25;display:block;margin-top:3px}
+.vs3 .w{border-color:rgba(255,90,31,.55);background:rgba(255,90,31,.07)}.vs3 .w b{color:var(--fl2)}
+/* proceso */
+.scan{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#000}
+.scan img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.scan:after{content:"";position:absolute;left:0;right:0;height:22%;top:-22%;background:linear-gradient(180deg,transparent,rgba(77,141,255,.35) 85%,rgba(200,225,255,.95));animation:scan 2.4s cubic-bezier(.5,0,.5,1) infinite;mix-blend-mode:screen}
+@keyframes scan{to{top:100%}}
+.hud{position:absolute;inset:10px;pointer-events:none}
+.hud i{position:absolute;width:22px;height:22px;border:2px solid var(--acc2)}
+.hud i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}.hud i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.hud i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}.hud i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
+.hud .t{position:absolute;left:30px;top:2px;font-family:var(--mono);font-size:10px;color:var(--acc2);letter-spacing:.12em}
+.clock{position:absolute;right:14px;bottom:14px;font-family:var(--mono);font-size:30px;font-weight:700;color:var(--hi);text-shadow:0 0 18px rgba(77,141,255,.8)}
+.lanes{display:grid;gap:10px}
+.lane{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:rgba(10,14,20,.85)}
+.lane .nm{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--hi);font-weight:700}.lane .nm span{color:var(--mut);font-weight:400;letter-spacing:.02em;font-family:var(--sans);font-size:12.5px;margin-left:6px}
+.lane .ct{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.lane .bar{grid-column:1/-1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.lane .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .9s linear}
+.lane.fl{border-color:rgba(255,90,31,.45)}.lane.fl .bar i{background:linear-gradient(90deg,var(--acc),var(--fl))}.lane.fl .nm{color:var(--fl2)}
+.lane .th{grid-column:1/-1;display:flex;gap:6px}.lane .th img{width:46px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--line2);animation:pop .4s ease-out}
+.lane.done .ct{color:var(--ok)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.log{font-family:var(--mono);font-size:12.5px;color:var(--acc2);margin:0;min-height:40px;transition:opacity .35s;padding-left:14px;border-left:1px solid var(--acc)}
+/* resultados */
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:rgba(5,7,10,.7)}
+.tabs button{border:0;background:transparent;color:var(--mut);padding:10px 4px;border-radius:9px;font-weight:600;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--panel);color:var(--hi);box-shadow:inset 0 0 0 1px var(--line2)}
+.stage{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#000;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.stage.white{background:#fff}
+.stage .ly{position:absolute;inset:0}
+.stage .ly img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.stage.white .ly img{object-fit:contain}
+.stage .ly.b{clip-path:inset(0 0 0 50%)}
+.stage .hd{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 14px rgba(77,141,255,.9);pointer-events:none}
+.stage .hd:after{content:"◂ ▸";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(5,7,10,.85);border:1.5px solid #fff;color:#fff;display:grid;place-items:center;font-size:12px;letter-spacing:2px}
+.stage .lb{position:absolute;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;padding:5px 8px;border-radius:6px;background:rgba(5,7,10,.8);color:var(--hi);pointer-events:none}
+.stage .lb.l{left:10px}.stage .lb.r{right:10px;color:var(--fl2);border:1px solid rgba(255,90,31,.6)}
+.stage .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:var(--mut);font-size:15px;background:repeating-linear-gradient(135deg,#0A0E14 0 12px,#0D121A 12px 24px)}
+.stage .none b{display:block;font-family:var(--mono);color:var(--bad);letter-spacing:.14em;font-size:13px;margin-bottom:6px}
+.stage.solo .ly.b{clip-path:none}.stage.solo .hd,.stage.solo .lb.l{display:none}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:fl .9s ease-out}@keyframes fl{0%{opacity:.85}100%{opacity:0}}
+.rivals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.rv{border:1px solid var(--line);border-radius:10px;background:rgba(5,7,10,.7);padding:5px;cursor:pointer;display:grid;gap:5px;color:var(--txt);text-align:center}
+.rv .im{aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#11161F;display:grid;place-items:center}
+.rv .im img{width:100%;height:100%;object-fit:cover}.rv.white .im{background:#fff}.rv.white .im img{object-fit:contain}
+.rv .im em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--bad)}
+.rv b{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--hi)}
+.rv.on{border-color:var(--acc);box-shadow:0 0 0 2px rgba(77,141,255,.3)}
+.rv.fl b{color:var(--fl2)}.rv.fl.on{border-color:var(--fl);box-shadow:0 0 0 2px rgba(255,90,31,.3)}
+.why{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:14px;margin:0;align-items:baseline}
+.why dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--mut)}.why dd{margin:0;color:var(--hi)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--mut)}.check input{width:20px;height:20px;margin-top:1px;accent-color:var(--acc)}
+.qr{background:#fff;padding:14px;justify-self:center;border-radius:12px;min-height:258px;min-width:258px;display:grid;place-items:center;box-shadow:0 0 40px -6px rgba(77,141,255,.55)}
 .qr img,.qr canvas{display:block;width:230px!important;height:230px!important}
 .row{display:flex;gap:8px}
-.viewer{position:fixed;inset:0;z-index:50;background:#05070B;display:none;flex-direction:column}
+.viewer{position:fixed;inset:0;z-index:50;background:#020305;display:none;flex-direction:column}
 .viewer.on{display:flex}
-.vbar{display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid var(--linea);gap:10px}
-.vbar span{color:var(--papel);font-weight:700}
+.vbar{display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid var(--line);gap:10px}
+.vbar span{color:var(--hi);font-family:var(--mono);font-size:12px;letter-spacing:.12em}
 .vscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;display:grid;place-items:center}
 .vscroll img{max-width:100%;max-height:100%}
 .vscroll.z{display:block}.vscroll.z img{max-width:none;max-height:none;width:300%}
-.vhint{text-align:center;color:var(--gris);font-size:13px;padding:8px 8px calc(12px + env(safe-area-inset-bottom));margin:0}
-.err{border:1px solid rgba(217,66,15,.6);background:rgba(217,66,15,.1);color:#FFD7C7;padding:12px;font-size:14px;margin:0}
+.vhint{text-align:center;color:var(--mut);font-size:13px;padding:8px 8px calc(12px + env(safe-area-inset-bottom));margin:0}
+.err{border:1px solid rgba(255,77,94,.6);background:rgba(255,77,94,.08);color:#FFC9CF;padding:12px;font-size:14px;margin:0;border-radius:10px}
 .hide{display:none!important}
-footer{text-align:center;color:#5D6678;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.rise{animation:rise .6s cubic-bezier(.2,.8,.2,1)}@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
-<linearGradient id="gS" x1="0" x2="1"><stop offset="0" stop-color="#3D7BFF" stop-opacity="0"/><stop offset=".28" stop-color="#3D7BFF" stop-opacity=".95"/><stop offset=".5" stop-color="#F2F6FF"/><stop offset=".72" stop-color="#3D7BFF" stop-opacity=".95"/><stop offset="1" stop-color="#3D7BFF" stop-opacity="0"/></linearGradient>
-<radialGradient id="gL"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FFE3D6"/><stop offset="1" stop-color="#D9420F"/></radialGradient>
-<radialGradient id="gG"><stop offset="0" stop-color="#FFB08A" stop-opacity=".9"/><stop offset=".35" stop-color="#D9420F" stop-opacity=".35"/><stop offset="1" stop-color="#D9420F" stop-opacity="0"/></radialGradient></defs>
-<symbol id="m" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="url(#gG)"/><rect x="0" y="48.6" width="100" height="2.8" rx="1.4" fill="url(#gS)"/><circle cx="50" cy="50" r="13" fill="url(#gL)"/><circle cx="50" cy="50" r="5" fill="#fff"/><circle cx="71" cy="64" r="5.5" fill="none" stroke="#D9420F" stroke-width="2"/><circle cx="80" cy="70" r="2.4" fill="#3D7BFF"/></symbol>
-<symbol id="cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="#A9C6FF" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="#A9C6FF" stroke-width="1.6"/></symbol></svg>
+<linearGradient id="gS" x1="0" x2="1"><stop offset="0" stop-color="#4D8DFF" stop-opacity="0"/><stop offset=".3" stop-color="#4D8DFF"/><stop offset=".5" stop-color="#F2F6FF"/><stop offset=".7" stop-color="#4D8DFF"/><stop offset="1" stop-color="#4D8DFF" stop-opacity="0"/></linearGradient>
+<radialGradient id="gL"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FFE3D6"/><stop offset="1" stop-color="#FF5A1F"/></radialGradient>
+<radialGradient id="gG"><stop offset="0" stop-color="#FFB08A" stop-opacity=".9"/><stop offset=".35" stop-color="#FF5A1F" stop-opacity=".35"/><stop offset="1" stop-color="#FF5A1F" stop-opacity="0"/></radialGradient></defs>
+<symbol id="m" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="url(#gG)"/><rect x="0" y="48.6" width="100" height="2.8" rx="1.4" fill="url(#gS)"/><circle cx="50" cy="50" r="13" fill="url(#gL)"/><circle cx="50" cy="50" r="5" fill="#fff"/></symbol>
+<symbol id="cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="#8FB8FF" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="#8FB8FF" stroke-width="1.6"/></symbol></svg>
 
 <div class="app">
-  <header><span class="brand"><svg viewBox="0 0 100 100"><use href="#m"/></svg><span class="f">flare</span><span class="l">lab</span></span><button class="cred" id="cred" title="Ajustes">—</button></header>
+  <header><span class="brand"><svg viewBox="0 0 100 100"><use href="#m"/></svg>FLARE LAB<small>IA vs IA</small></span><button class="chip" id="cred" title="Ajustes"><i></i><span>—</span></button></header>
 
   <section id="vAjustes" class="hide" style="display:grid;gap:18px">
-    <div class="card">
-      <p class="eyebrow">Configuración · solo la primera vez</p>
+    <div class="panel">
+      <p class="kick">Configuración · una vez</p>
       <h2>Conecta la app</h2>
-      <div class="field"><label>Dirección del servidor</label><input id="inServ" placeholder="https://flarelab-demo.xxxx.workers.dev" autocomplete="off" autocapitalize="off"></div>
+      <div class="field"><label>Servidor</label><input id="inServ" placeholder="https://flarelab-demo.xxxx.workers.dev" autocomplete="off" autocapitalize="off"></div>
       <div class="field"><label>Código de acceso</label><input id="inCod" type="password" autocomplete="off"></div>
       <div class="field"><label>Tu nombre (vendedor)</label><input id="inVend" placeholder="ej. Alan" autocomplete="off"></div>
       <button class="btn" id="btGuardar">Guardar y entrar</button>
@@ -100,40 +158,69 @@ footer{text-align:center;color:#5D6678;font-family:var(--mono);font-size:10px;le
   </section>
 
   <section id="vCaptura" class="hide" style="display:grid;gap:18px">
-    <div style="display:grid;gap:8px">
-      <p class="eyebrow">Demo en vivo</p>
-      <h1>Tu producto, en 3 fotos <em>que venden</em>.</h1>
-      <p class="muted">Para tu tienda en línea, tu temporada y tu campaña. Sin estudio ni sesión de fotos.</p>
+    <div style="display:grid;gap:10px">
+      <p class="kick">Prueba en vivo · 2 min</p>
+      <h1>Tu producto.<br>3 IAs. <span class="g">Tú decides.</span></h1>
+      <p class="muted">La misma foto de tu producto pasa por Claude, Gemini y Flare Lab al mismo tiempo. Compara con tus propios ojos.</p>
     </div>
-    <div class="field"><label>1 · ¿Qué es el producto?</label><input id="inProd" class="req" placeholder="ej. guantes de portero, dulce de tamarindo, bolsa de piel" maxlength="120" autocomplete="off"></div>
-    <div class="field"><label>2 · Toma las fotos (luz de día, producto completo)</label><div class="slots" id="slots"></div></div>
-    <p class="muted" style="margin-top:-8px">La de frente es obligatoria. Con la de lado y la del logo o etiqueta, el resultado es mucho más fiel.</p>
-    <div class="field"><label>Marca o estilo (opcional)</label><input id="inNota" placeholder="ej. marca mexicana, estilo minimalista, colores tierra" maxlength="200"></div>
-    <button class="btn" id="btCrear" disabled>Crear sus 3 fotos</button>
+    <div class="vs3"><div><b>CLAUDE</b><span>Edita tu foto</span></div><div><b>GEMINI</b><span>Pedido normal</span></div><div class="w"><b>FLARE LAB</b><span>Método de fidelidad</span></div></div>
+    <div class="field"><label>01 · ¿Qué es el producto?</label><input id="inProd" class="req" placeholder="ej. bota de piel, guantes de portero, dulce de tamarindo" maxlength="120" autocomplete="off"></div>
+    <div class="field"><label>Tipo de producto · decide el lugar de la foto</label><div class="cats" id="cats"></div></div>
+    <div class="field"><label>02 · Fotos (luz de día, producto completo)</label><div class="slots" id="slots"></div></div>
+    <p class="muted" style="margin-top:-8px">La de frente es obligatoria y es la que reciben las 3 IAs. Flare Lab usa además la de lado y la del logo.</p>
+    <div class="field"><label>Marca o estilo (opcional)</label><input id="inNota" placeholder="ej. marca mexicana, minimalista, colores tierra" maxlength="200"></div>
+    <button class="btn" id="btCrear" disabled>Iniciar comparativa</button>
   </section>
 
   <section id="vRes" class="hide" style="display:grid;gap:16px">
-    <div style="display:grid;gap:6px"><p class="eyebrow" id="resEyebrow">Creando · ~2 minutos</p><h2 id="resTit">Ya estamos trabajando en tus fotos.</h2></div>
-    <p class="talk" id="talk"></p>
-    <div style="display:grid;gap:14px" id="res"></div>
+    <div style="display:grid;gap:8px"><p class="kick" id="resKick">Procesando · en vivo</p><h2 id="resTit">3 IAs trabajando en tu producto.</h2></div>
+
+    <div id="proc" style="display:grid;gap:14px">
+      <div class="scan"><img id="scanImg" alt=""><div class="hud"><i></i><i></i><i></i><i></i><span class="t" id="hudT">ANALIZANDO PRODUCTO</span></div><div class="clock" id="clock">0:00</div></div>
+      <p class="log" id="log"></p>
+      <div class="lanes" id="lanes"></div>
+    </div>
+
+    <div id="resul" class="hide" style="display:grid;gap:12px">
+      <div class="tabs" id="tabs"></div>
+      <div class="stage" id="stage"><div class="ly a" id="lyA"></div><div class="ly b" id="lyB"></div><div class="hd" id="hd"></div><span class="lb l" id="lbL"></span><span class="lb r">FLARE LAB</span><div class="flash" id="flash"></div></div>
+      <p class="muted" style="text-align:center;margin-top:-4px;font-size:12.5px">Desliza para comparar · toca una IA para cambiar</p>
+      <div class="rivals" id="rivals"></div>
+      <dl class="why" id="why"></dl>
+      <div class="acts"><button class="btn small line" id="btZoom">Ver Flare Lab con zoom</button><button class="btn small line" id="btComp">Compartir</button></div>
+    </div>
+
     <p class="err hide" id="err"></p>
-    <div class="card hide" id="llevar">
-      <p class="eyebrow">Llévate tus fotos</p>
-      <h2>Escanea y <em>quédatelas</em>.</h2>
+
+    <div class="panel hide rise" id="lead">
+      <p class="kick">Llévate tu comparativa</p>
+      <h2>Tus fotos y la comparativa, <span class="g">directo a tu celular</span>.</h2>
+      <p class="muted">Te las mandamos con una propuesta para tu catálogo completo.</p>
+      <div class="field"><label>Nombre</label><input id="lNom" autocomplete="name" maxlength="80"></div>
+      <div class="field"><label>WhatsApp</label><input id="lTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" maxlength="16"></div>
+      <div class="field"><label>Correo</label><input id="lMail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" maxlength="120"></div>
+      <label class="check"><input type="checkbox" id="lOk" checked><span>Acepto que Flare Lab me contacte por WhatsApp o correo con mis fotos y su propuesta.</span></label>
+      <button class="btn" id="btLead" disabled>Generar mi QR</button>
+      <p class="err hide" id="leadErr"></p>
+    </div>
+
+    <div class="panel hide rise" id="llevar">
+      <p class="kick">Escanea</p>
+      <h2>Escanea y <span class="g">quédatelas</span>.</h2>
       <div class="qr" id="qr"></div>
       <p class="muted" id="qrLink" style="text-align:center;word-break:break-all"></p>
-      <div class="row"><input id="inTel" type="tel" inputmode="numeric" placeholder="O su WhatsApp (10 dígitos)" maxlength="13"><button class="btn small wa" style="width:auto;padding:0 18px" id="btWa">Enviar</button></div>
-      <button class="btn small line" id="btCopiar">Copiar link</button>
+      <div class="row"><button class="btn small wa" id="btWa">Mandar por WhatsApp</button><button class="btn small line" style="width:auto;padding:0 16px" id="btCopiar">Copiar</button></div>
     </div>
-    <div class="card hide" id="cierre">
-      <h2>¿Lo hacemos con <em>todo tu catálogo</em>?</h2>
+
+    <div class="panel hide" id="cierre">
+      <h2>¿Lo hacemos con <span class="g">todo tu catálogo</span>?</h2>
       <p class="muted">Fotos de tienda, temporada y campaña sin sesión de fotos. Solo pagas las que apruebas.</p>
       <a class="btn" href="https://calendly.com/alan-flarelab/30min" target="_blank" rel="noopener">Agendar 20 minutos</a>
     </div>
     <button class="btn line" id="btOtra">Otro producto</button>
   </section>
 
-  <footer>Hecho con IA por Flare Lab</footer>
+  <footer>Flare Lab · fotos de producto con IA</footer>
 </div>
 
 <div class="viewer" id="viewer">
@@ -148,118 +235,221 @@ footer{text-align:center;color:#5D6678;font-family:var(--mono);font-size:10px;le
   const $=id=>document.getElementById(id);
   const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
   let serv=LS.get('fl_serv')||'', cod=LS.get('fl_cod')||'', vend=LS.get('fl_vend')||'';
-  let fotos=[null,null,null], tareas={}, listos={}, wm={}, linkFotos='', t0=0, timer=null, talkT=null;
-  const TIPOS=[
-    {k:'catalogo',n:'Catálogo',d:'Fondo blanco · con zoom para su tienda en línea',cls:'cat'},
-    {k:'temporada',n:'Temporada',d:'El producto en su lugar y su momento',cls:''},
-    {k:'campana',n:'Campaña',d:'Con la persona que lo usa · lista para anuncios',cls:''}];
+  let fotos=[null,null,null], tareas={}, estado={}, img={}, blob={}, linkFotos='', t0=0, timer=null, logT=null, tab='catalogo', rival='tufoto', fin=false;
+
+  const TIPOS=[{k:'catalogo',n:'Catálogo'},{k:'temporada',n:'Temporada'},{k:'campana',n:'Campaña'}];
+  const MOTORES=[
+    {k:'claude',n:'CLAUDE',d:'edita tu foto',como:'Claude no genera imágenes: recorta tu foto y la pone en un fondo.',esp:15},
+    {k:'gemini',n:'GEMINI',d:'pedido normal',como:'Gemini genera la imagen con 1 foto y lo que pediría cualquier persona.',esp:30},
+    {k:'flare',n:'FLARE LAB',d:'método de fidelidad',como:'Flare Lab usa tus 3 fotos y un método para que el producto salga idéntico. Catálogo en 4K.',esp:65}];
+  // clave de cada imagen: 'catalogo' (Flare), 'gemini_catalogo', 'claude_catalogo'
+  const clave=(m,t)=>m==='flare'?t:m+'_'+t;
+  const existe=(m,t)=>!(m==='claude'&&t!=='catalogo');
   const SLOTS=[{n:'1 · De frente',d:'Obligatoria · el lado del logo',req:1},{n:'2 · De lado',d:'Opcional'},{n:'3 · Logo o etiqueta',d:'Opcional · de cerca'}];
-  const TALK=['Una sesión con estudio, modelo y locación cuesta de $2,400 a $4,500 por foto en México.',
-    'Aquí no hay estudio ni modelo: solo la foto que acabas de tomar.',
-    'La foto de catálogo sale en alta resolución: puedes acercarte hasta ver la textura.',
-    'La escena y la persona se eligen según cómo se usa tu producto de verdad.',
-    'Para tu tienda, tu temporada y tus anuncios, el mismo día.',
-    'Solo se pagan las fotos que apruebas.'];
+  const LOG=['Claude no crea fotos: edita la tuya con código.',
+    'Gemini sí crea: le pedimos lo que pediría cualquier persona.',
+    'Flare Lab usa tus 3 fotos y un método para copiar el producto idéntico.',
+    'Una sesión con estudio y modelo cuesta de $2,400 a $4,500 por foto en México.',
+    'El catálogo de Flare Lab sale en 4K: vas a poder acercarte hasta ver la textura.',
+    'La escena y la persona se eligen según cómo se usa tu producto de verdad.'];
   const qs=new URLSearchParams(location.search);
   if(qs.has('prueba')){serv='prueba';cod='x'}
   const prueba=()=>serv.trim().toLowerCase()==='prueba';
+  const mmss=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  const seg=()=>Math.floor((Date.now()-t0)/1000);
 
   function vista(v){['vAjustes','vCaptura','vRes'].forEach(x=>$(x).classList.toggle('hide',x!==v));window.scrollTo(0,0)}
   function api(path,opt={}){return fetch(serv.replace(/\/$/,'')+path,{...opt,headers:{...(opt.headers||{}),'X-Codigo':cod}}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok||j.error)throw new Error(j.error||('Error '+r.status));return j})}
-  function creditos(){if(prueba()){$('cred').textContent='MODO PRUEBA';return}
-    api('/creditos').then(j=>{$('cred').textContent=Math.round(j.creditos)+' CR'}).catch(()=>{$('cred').textContent='SIN CONEXIÓN'})}
+  function creditos(){const s=$('cred').querySelector('span');if(prueba()){s.textContent='MODO PRUEBA';return}
+    api('/creditos').then(j=>{s.textContent=Math.round(j.creditos)+' CR'}).catch(()=>{s.textContent='SIN CONEXIÓN'})}
 
   $('inServ').value=serv;$('inCod').value=cod;$('inVend').value=vend;
   $('btGuardar').onclick=()=>{serv=$('inServ').value.trim();cod=$('inCod').value.trim();vend=$('inVend').value.trim();LS.set('fl_serv',serv);LS.set('fl_cod',cod);LS.set('fl_vend',vend);vista('vCaptura');creditos()};
   $('cred').onclick=()=>vista('vAjustes');
   if(serv&&cod){vista('vCaptura');creditos()}else vista('vAjustes');
 
-  // fotos: se comprimen a 2000 px antes de subir (rápido aunque haya poca señal)
-  function comprimir(file){return new Promise((ok,no)=>{const img=new Image();img.onload=()=>{const s=Math.min(1,2000/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);c.toBlob(b=>ok({blob:b,url:URL.createObjectURL(b)}),'image/jpeg',.9)};img.onerror=no;img.src=URL.createObjectURL(file)})}
+  // fotos: se comprimen a 2000 px (sube rápido aunque haya poca señal; Recraft acepta máx 5 MB)
+  function comprimir(file){return new Promise((ok,no)=>{const im=new Image();im.onload=()=>{const s=Math.min(1,2000/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>ok({blob:b,url:URL.createObjectURL(b)}),'image/jpeg',.9)};im.onerror=no;im.src=URL.createObjectURL(file)})}
   function listoParaCrear(){const p=$('inProd').value.trim().length>=3;$('inProd').classList.toggle('req',!p);$('btCrear').disabled=!(p&&fotos[0])}
   function pintarSlots(){
     $('slots').innerHTML=SLOTS.map((s,i)=>'<label class="slot'+(s.req&&!fotos[i]?' req':'')+'">'+(fotos[i]?'<img src="'+fotos[i].url+'" alt=""><button class="x" data-i="'+i+'" aria-label="Quitar">×</button><span class="tg">'+s.n+'</span>':'<span><svg><use href="#cam"/></svg><b>'+s.n+'</b><small>'+s.d+'</small></span>')+'<input type="file" accept="image/*" capture="environment" class="hide" data-slot="'+i+'"></label>').join('');
     $('slots').querySelectorAll('input').forEach(inp=>inp.onchange=async e=>{const f=e.target.files[0];if(!f)return;fotos[+inp.dataset.slot]=await comprimir(f);pintarSlots()});
     $('slots').querySelectorAll('.x').forEach(b=>b.onclick=ev=>{ev.preventDefault();fotos[+b.dataset.i]=null;pintarSlots()});
     listoParaCrear()}
+  const CATS=[['','Automático'],['calzado','Calzado'],['ropa','Ropa'],['bolsa','Bolsa'],['joyeria','Joyería/reloj'],['belleza','Belleza'],['comida','Comida'],['bebida','Bebida'],['deporte','Deporte'],['electronica','Electrónica'],['hogar','Hogar'],['mascota','Mascota'],['bebe','Bebé/niños'],['otro','Otro']];
+  let cat='';function pintarCats(){$('cats').innerHTML=CATS.map(([k,n])=>'<button type="button" data-k="'+k+'" class="'+(k===cat?'on':'')+'">'+n+'</button>').join('');$('cats').querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.k;pintarCats()})}
+  pintarCats();
   $('inProd').oninput=listoParaCrear;
   pintarSlots();
 
-  // crear
+  // ---------- crear ----------
+  function todasLasClaves(){const ks=[];MOTORES.forEach(m=>TIPOS.forEach(t=>{if(existe(m.k,t.k))ks.push(clave(m.k,t.k))}));return ks}
+  function pintarLanes(){
+    $('lanes').innerHTML=MOTORES.map(m=>{const ks=TIPOS.filter(t=>existe(m.k,t.k)).map(t=>clave(m.k,t.k));const ok=ks.filter(k=>estado[k]==='ok').length,mal=ks.filter(k=>estado[k]==='fail'||estado[k]==='late').length;
+      const pct=Math.min(96,Math.round(seg()/m.esp*100)),done=ok+mal===ks.length;
+      return '<div class="lane'+(m.k==='flare'?' fl':'')+(done?' done':'')+'"><div class="nm">'+m.n+'<span>'+m.d+'</span></div><div class="ct">'+(done?(mal?ok+'/'+ks.length+' listas':'LISTO'):ok+'/'+ks.length)+'</div><div class="bar"><i style="width:'+(done?100:pct)+'%"></i></div>'+
+        (ok?'<div class="th">'+ks.filter(k=>estado[k]==='ok').map(k=>'<img src="'+img[k]+'" alt="">').join('')+'</div>':'')+'</div>'}).join('')}
   $('btCrear').onclick=async()=>{
-    vista('vRes');$('err').classList.add('hide');$('cierre').classList.add('hide');$('llevar').classList.add('hide');listos={};tareas={};wm={};linkFotos='';
-    $('resEyebrow').textContent='Creando · ~2 minutos';$('resTit').textContent='Ya estamos trabajando en tus fotos.';
-    $('res').innerHTML=TIPOS.map(t=>'<div class="out '+t.cls+'" id="o_'+t.k+'"><div class="hd"><b>'+t.n+'</b><span id="tm_'+t.k+'">0:00</span></div><div class="img" id="im_'+t.k+'"><p class="st">'+t.d+'</p></div><div class="acts hide" id="ac_'+t.k+'"><button class="btn small line" data-z>Ver con zoom</button><button class="btn small" data-s>Compartir</button></div></div>').join('');
-    let i=0;$('talk').textContent=TALK[0];clearInterval(talkT);talkT=setInterval(()=>{i=(i+1)%TALK.length;$('talk').style.opacity=0;setTimeout(()=>{$('talk').textContent=TALK[i];$('talk').style.opacity=1},400)},7000);
-    t0=Date.now();clearInterval(timer);timer=setInterval(reloj,1000);
+    vista('vRes');fin=false;['err','cierre','llevar','lead','resul'].forEach(x=>$(x).classList.add('hide'));$('proc').classList.remove('hide');
+    tareas={};estado={};img={};blob={};linkFotos='';tab='catalogo';rival='tufoto';
+    $('resKick').textContent='Procesando · en vivo';$('resTit').textContent='3 IAs trabajando en tu producto.';
+    $('scanImg').src=fotos[0].url;$('hudT').textContent='SUBIENDO FOTOS';
+    let i=0;$('log').textContent=LOG[0];clearInterval(logT);logT=setInterval(()=>{i=(i+1)%LOG.length;$('log').style.opacity=0;setTimeout(()=>{$('log').textContent=LOG[i];$('log').style.opacity=1},350)},6500);
+    t0=Date.now();clearInterval(timer);timer=setInterval(()=>{$('clock').textContent=mmss(seg());if(!fin)pintarLanes()},1000);pintarLanes();
     try{
       if(prueba()){simular();return}
-      const urls=[];for(const f of fotos.filter(Boolean)){const fd=new FormData();fd.append('file',f.blob,'producto.jpg');urls.push((await api('/subir',{method:'POST',body:fd})).url)}
-      const j=await api('/generar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls,producto:$('inProd').value.trim(),nota:$('inNota').value.trim(),vendedor:vend})});
-      tareas=j.tareas;sondear();
+      const urls=await Promise.all(fotos.filter(Boolean).map(f=>{const fd=new FormData();fd.append('file',f.blob,'producto.jpg');return api('/subir',{method:'POST',body:fd}).then(j=>j.url)}));
+      $('hudT').textContent='3 IAS GENERANDO';
+      const j=await api('/generar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls,producto:$('inProd').value.trim(),nota:$('inNota').value.trim(),categoria:cat,vendedor:vend})});
+      tareas=j.tareas;todasLasClaves().forEach(k=>{if(!tareas[k])estado[k]='fail'});sondear();
     }catch(e){fallo(e.message)}
   };
-  function reloj(){const s=Math.floor((Date.now()-t0)/1000),txt=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');TIPOS.forEach(t=>{if(!listos[t.k]){const el=$('tm_'+t.k);if(el)el.textContent=txt}})}
   async function sondear(){
-    const pend=TIPOS.filter(t=>tareas[t.k]&&!listos[t.k]);
-    await Promise.all(pend.map(async t=>{try{const j=await api('/estado?id='+encodeURIComponent(tareas[t.k]));
-      if(j.estado==='success'&&j.urls&&j.urls[0])await listo(t.k,j.urls[0]);else if(j.estado==='fail')marcarFallo(t.k,j.error)}catch(e){}}));
-    if(TIPOS.some(t=>tareas[t.k]&&!listos[t.k]))setTimeout(sondear,4000);else terminar();
+    const pend=todasLasClaves().filter(k=>tareas[k]&&!estado[k]);
+    await Promise.all(pend.map(async k=>{try{const j=await api('/estado?id='+encodeURIComponent(tareas[k]));
+      if(j.estado==='success'&&j.urls&&j.urls[0])await listo(k,j.urls[0]);else if(j.estado==='fail')estado[k]='fail'}catch(e){}}));
+    pintarLanes();
+    const s=seg(),faltan=todasLasClaves().filter(k=>!estado[k]),faltaFlare=faltan.some(k=>TIPOS.some(t=>t.k===k));
+    // límite: a los 100 s ya no se espera a Claude/Gemini; a los 150 s se cierra con lo que haya
+    if(!faltan.length||(!faltaFlare&&s>=100)||s>=150){faltan.forEach(k=>estado[k]='late');terminar()}else setTimeout(sondear,3000);
   }
-
-  // marca de agua Flare Lab en todo lo que sale de la app
-  async function marca(blob){
-    await Promise.race([Promise.all([document.fonts.load('800 40px Manrope'),document.fonts.load('italic 40px "Instrument Serif"'),document.fonts.load('500 20px "JetBrains Mono"')]),new Promise(r=>setTimeout(r,1500))]).catch(()=>{});
-    const im=await createImageBitmap(blob);const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);
-    const W=c.width,s=Math.round(W*0.03),pad=Math.round(s*0.55),m=Math.round(s*0.9);
-    g.font='800 '+s+'px Manrope';const w1=g.measureText('flare ').width;g.font='italic '+Math.round(s*1.05)+'px "Instrument Serif"';const w2=g.measureText('lab').width;
-    const sub='HECHO CON IA';g.font='500 '+Math.round(s*0.36)+'px "JetBrains Mono"';const w3=g.measureText(sub).width;
-    const lw=s*1.15,bw=Math.max(lw+w1+w2,w3)+pad*2,bh=s*1.75+pad*1.2,x=W-bw-m,y=c.height-bh-m;
-    g.fillStyle='rgba(10,13,20,0.55)';g.beginPath();if(g.roundRect)g.roundRect(x,y,bw,bh,s*0.25);else g.rect(x,y,bw,bh);g.fill();
-    const cx=x+pad+s*0.45,cy=y+pad+s*0.58,gr=g.createRadialGradient(cx,cy,0,cx,cy,s*0.55);gr.addColorStop(0,'#fff');gr.addColorStop(.4,'#FFE3D6');gr.addColorStop(1,'rgba(217,66,15,0)');
-    g.fillStyle=gr;g.beginPath();g.arc(cx,cy,s*0.55,0,7);g.fill();g.fillStyle='rgba(169,198,255,.9)';g.fillRect(cx-s*0.6,cy-s*0.04,s*1.2,s*0.08);
-    g.fillStyle='rgba(242,240,236,.96)';g.font='800 '+s+'px Manrope';g.fillText('flare',x+pad+lw,y+pad+s*0.92);
-    g.fillStyle='rgba(169,198,255,.96)';g.font='italic '+Math.round(s*1.05)+'px "Instrument Serif"';g.fillText('lab',x+pad+lw+w1,y+pad+s*0.92);
-    g.fillStyle='rgba(205,212,224,.88)';g.font='500 '+Math.round(s*0.36)+'px "JetBrains Mono"';g.fillText(sub,x+pad,y+pad+s*1.58);
-    return await aBlob(c)}
-  function aBlob(c){return new Promise(ok=>{const d=c.toDataURL('image/jpeg',.92),bin=atob(d.split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);ok(new Blob([u],{type:'image/jpeg'}))})}
-  async function traer(url){const r=prueba()?await fetch(url):await fetch(serv.replace(/\/$/,'')+'/img?u='+encodeURIComponent(url),{headers:{'X-Codigo':cod}});if(!r.ok)throw new Error('img');return r.blob()}
+  async function traer(url){const r=(prueba()||url.startsWith('blob:')||!/^https?:/.test(url))?await fetch(url):await fetch(serv.replace(/\/$/,'')+'/img?u='+encodeURIComponent(url),{headers:{'X-Codigo':cod}});if(!r.ok)throw new Error('img');return r.blob()}
   async function listo(k,url){
-    listos[k]=url;const t=TIPOS.find(x=>x.k===k);
-    try{wm[k]=await marca(await traer(url));listos[k]=URL.createObjectURL(wm[k])}catch(e){}
-    $('im_'+k).innerHTML='<img src="'+listos[k]+'" alt="'+t.n+'">';$('o_'+k).classList.add('done');$('ac_'+k).classList.remove('hide');
-    $('ac_'+k).querySelector('[data-z]').onclick=()=>verZoom(k);$('ac_'+k).querySelector('[data-s]').onclick=()=>compartir(k)}
-  function marcarFallo(k,msg){listos[k]='x';$('im_'+k).innerHTML='<p class="st">Esta foto no salió ('+(msg||'error')+'). Las otras siguen; puedes intentar de nuevo con "Otro producto".</p>'}
-  function terminar(){clearInterval(timer);clearInterval(talkT);const s=Math.floor((Date.now()-t0)/1000);
-    $('resEyebrow').textContent='Listo en '+Math.floor(s/60)+' min '+(s%60)+' s';$('resTit').textContent='Estas son tus 3 fotos.';
-    $('talk').textContent='Haz zoom a la foto de catálogo: es el producto que acabas de fotografiar.';$('cierre').classList.remove('hide');creditos();guardar()}
-  function fallo(m){clearInterval(timer);clearInterval(talkT);$('err').textContent='No se pudo crear: '+m+'. Revisa la señal o el código (toca el contador arriba a la derecha).';$('err').classList.remove('hide')}
-  async function simular(){const demo={catalogo:'demo/catalogo.jpg',temporada:'demo/temporada.jpg',campana:'demo/campana.jpg'};const espera=ms=>new Promise(r=>setTimeout(r,ms));for(const t of TIPOS){await espera(1800);await listo(t.k,demo[t.k])}terminar()}
+    try{let b=await traer(url);
+      if(k==='claude_catalogo')b=await claudeFondo(b);
+      else if(TIPOS.some(t=>t.k===k))b=await marca(b);
+      blob[k]=b;img[k]=URL.createObjectURL(b);estado[k]='ok';
+    }catch(e){img[k]=url;estado[k]='ok'}}
+  function fallo(m){clearInterval(timer);clearInterval(logT);$('err').textContent='No se pudo crear: '+m+'. Revisa la señal o el código (toca el indicador de arriba).';$('err').classList.remove('hide')}
+  async function simular(){
+    const demo={catalogo:'demo/catalogo.jpg',temporada:'demo/temporada.jpg',campana:'demo/campana.jpg',claude_catalogo:'demo/claude.png',gemini_catalogo:'demo/gemini.jpg',gemini_temporada:'demo/gemini.jpg',gemini_campana:'demo/gemini.jpg'};
+    const orden=['claude_catalogo','gemini_catalogo','gemini_temporada','gemini_campana','catalogo','temporada','campana'];
+    $('hudT').textContent='3 IAS GENERANDO';
+    for(const k of orden){await new Promise(r=>setTimeout(r,900));await listo(k,demo[k]);pintarLanes()}
+    terminar()}
 
-  // QR y WhatsApp: la persona se lleva sus fotos con marca de agua
-  async function guardar(){
-    const ks=TIPOS.filter(t=>wm[t.k]);if(!ks.length)return;$('llevar').classList.remove('hide');$('qr').innerHTML='';$('qrLink').textContent='Preparando su link…';
+  // ---------- Claude: tu foto recortada sobre degradado con reflejo (lo que hace Claude al pedirle una foto) ----------
+  async function claudeFondo(png){
+    const im=await createImageBitmap(png);
+    const s=Math.min(1,240/Math.max(im.width,im.height)),tc=document.createElement('canvas');tc.width=Math.max(1,Math.round(im.width*s));tc.height=Math.max(1,Math.round(im.height*s));
+    const tg=tc.getContext('2d');tg.drawImage(im,0,0,tc.width,tc.height);const d=tg.getImageData(0,0,tc.width,tc.height).data;
+    let x0=tc.width,y0=tc.height,x1=0,y1=0;for(let y=0;y<tc.height;y++)for(let x=0;x<tc.width;x++)if(d[(y*tc.width+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+    if(x1<=x0||y1<=y0){x0=0;y0=0;x1=tc.width;y1=tc.height}
+    const sx=x0/s,sy=y0/s,sw=(x1-x0+1)/s,sh=(y1-y0+1)/s;
+    const W=1600,H=2000,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+    const bg=g.createRadialGradient(W/2,H*.38,W*.1,W/2,H*.45,H*.75);bg.addColorStop(0,'#F1EEE9');bg.addColorStop(1,'#B9B5AF');g.fillStyle=bg;g.fillRect(0,0,W,H);
+    const k=Math.min(W*.74/sw,H*.58/sh),dw=sw*k,dh=sh*k,dx=(W-dw)/2,dy=H*.1+(H*.58-dh)/2;
+    g.save();g.translate(0,dy*2+dh*2);g.scale(1,-1);g.globalAlpha=.16;g.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);g.restore();
+    const fade=g.createLinearGradient(0,dy+dh,0,dy+dh*1.35);fade.addColorStop(0,'rgba(185,181,175,0)');fade.addColorStop(1,'rgba(185,181,175,1)');g.fillStyle=fade;g.fillRect(0,dy+dh,W,H-(dy+dh));
+    g.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);
+    return await aBlob(c,.9)}
+
+  // ---------- marca de agua Flare Lab ----------
+  async function fuentes(){await Promise.race([Promise.all([document.fonts.load('700 40px "Space Grotesk"'),document.fonts.load('500 20px "JetBrains Mono"')]),new Promise(r=>setTimeout(r,1500))]).catch(()=>{})}
+  async function marca(b){
+    await fuentes();const im=await createImageBitmap(b);const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);
+    sello(g,c.width,c.height);return await aBlob(c,.92)}
+  function sello(g,W,H){
+    const s=Math.round(W*0.03),pad=Math.round(s*0.55),m=Math.round(s*0.9);
+    g.font='700 '+s+'px "Space Grotesk"';const w1=g.measureText('FLARE LAB').width;
+    const sub='HECHO CON IA';g.font='500 '+Math.round(s*0.36)+'px "JetBrains Mono"';const w3=g.measureText(sub).width;
+    const lw=s*1.2,bw=Math.max(lw+w1,w3)+pad*2,bh=s*1.75+pad*1.2,x=W-bw-m,y=H-bh-m;
+    g.fillStyle='rgba(5,7,10,0.6)';g.beginPath();if(g.roundRect)g.roundRect(x,y,bw,bh,s*0.3);else g.rect(x,y,bw,bh);g.fill();
+    const cx=x+pad+s*0.45,cy=y+pad+s*0.58,gr=g.createRadialGradient(cx,cy,0,cx,cy,s*0.55);gr.addColorStop(0,'#fff');gr.addColorStop(.4,'#FFE3D6');gr.addColorStop(1,'rgba(255,90,31,0)');
+    g.fillStyle=gr;g.beginPath();g.arc(cx,cy,s*0.55,0,7);g.fill();g.fillStyle='rgba(143,184,255,.95)';g.fillRect(cx-s*0.6,cy-s*0.04,s*1.2,s*0.08);
+    g.fillStyle='rgba(243,246,250,.97)';g.font='700 '+s+'px "Space Grotesk"';g.fillText('FLARE LAB',x+pad+lw,y+pad+s*0.92);
+    g.fillStyle='rgba(195,204,217,.9)';g.font='500 '+Math.round(s*0.36)+'px "JetBrains Mono"';g.fillText(sub,x+pad,y+pad+s*1.58)}
+  function aBlob(c,q){return new Promise(ok=>{const d=c.toDataURL('image/jpeg',q),bin=atob(d.split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);ok(new Blob([u],{type:'image/jpeg'}))})}
+
+  // ---------- resultados: duelo con deslizador ----------
+  function terminar(){
+    if(fin)return;fin=true;clearInterval(timer);clearInterval(logT);pintarLanes();
+    const s=seg();$('resKick').textContent='Listo en '+mmss(s)+' min';$('resTit').innerHTML='Mismo producto. <span class="g">Compara.</span>';
+    $('proc').classList.add('hide');$('resul').classList.remove('hide');$('resul').classList.add('rise');
+    pintarTabs();pintar(true);
+    $('lead').classList.remove('hide');$('cierre').classList.remove('hide');creditos();
+    setTimeout(()=>$('resul').scrollIntoView({behavior:'smooth',block:'start'}),80)}
+  function pintarTabs(){$('tabs').innerHTML=TIPOS.map(t=>'<button data-t="'+t.k+'" class="'+(t.k===tab?'on':'')+'">'+t.n+'</button>').join('');
+    $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;pintarTabs();pintar(false)})}
+  const src=(m,t)=>m==='tufoto'?fotos[0].url:(estado[clave(m,t)]==='ok'?img[clave(m,t)]:null);
+  function pintar(revelar){
+    const flare=src('flare',tab),blanco=tab==='catalogo';
+    $('stage').classList.toggle('white',blanco);
+    const nombre={tufoto:'TU FOTO',claude:'CLAUDE',gemini:'GEMINI',flare:'FLARE LAB'};
+    const solo=rival==='flare';
+    $('stage').classList.toggle('solo',solo);
+    const ra=solo?null:(existe(rival,tab)?src(rival,tab):'x');
+    $('lyA').innerHTML=solo?'':(ra==='x'?'<div class="none"><div><b>'+nombre[rival]+' ✕</b>Claude no genera imágenes: no puede crear escenas ni personas con tu producto.</div></div>':ra?'<img src="'+ra+'" alt="">':'<div class="none"><div><b>'+nombre[rival]+'</b>No llegó a tiempo.</div></div>');
+    $('lyB').innerHTML=flare?'<img src="'+flare+'" alt="">':'<div class="none"><div><b>FLARE LAB</b>Esta foto no salió. Toca "Otro producto" para repetir.</div></div>';
+    $('lbL').textContent=nombre[rival];
+    $('rivals').innerHTML=['tufoto','claude','gemini','flare'].map(m=>{const u=existe(m,tab)?src(m,tab):'x';
+      return '<button class="rv'+(m==='flare'?' fl':'')+(m===rival?' on':'')+(blanco&&m!=='tufoto'?' white':'')+'" data-m="'+m+'"><div class="im">'+(u==='x'?'<em>NO GENERA</em>':u?'<img src="'+u+'" alt="">':'<em>—</em>')+'</div><b>'+nombre[m]+'</b></button>'}).join('');
+    $('rivals').querySelectorAll('.rv').forEach(b=>b.onclick=()=>{rival=b.dataset.m;pintar(false)});
+    const mo=MOTORES.find(m=>m.k===rival);
+    $('why').innerHTML=(rival==='tufoto'?'<dt>TU FOTO</dt><dd>La foto que acabas de tomar con el celular.</dd>':mo&&rival!=='flare'?'<dt>'+mo.n+'</dt><dd>'+mo.como+'</dd>':'')+'<dt>FLARE LAB</dt><dd>'+MOTORES[2].como+'</dd>';
+    corte(revelar?0:50);
+    if(revelar){$('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');barrido()}}
+  let pos=50;
+  function corte(p){pos=Math.max(0,Math.min(100,p));$('lyB').style.clipPath=$('stage').classList.contains('solo')?'none':'inset(0 0 0 '+pos+'%)';$('hd').style.left=pos+'%'}
+  function barrido(){const a=performance.now();(function f(n){const t=Math.min(1,(n-a)/1400),e=1-Math.pow(1-t,3);corte(100-50*e);if(t<1)requestAnimationFrame(f)})(a);setTimeout(()=>{if(pos>50)corte(50)},1700)}
+  (function(){const st=$('stage');let on=false;const mv=e=>{const r=st.getBoundingClientRect();corte((e.clientX-r.left)/r.width*100)};
+    st.addEventListener('pointerdown',e=>{if(st.classList.contains('solo'))return;on=true;st.setPointerCapture(e.pointerId);mv(e)});
+    st.addEventListener('pointermove',e=>{if(on)mv(e)});['pointerup','pointercancel'].forEach(ev=>st.addEventListener(ev,()=>on=false))})();
+
+  // ---------- comparativa en una sola imagen (para compartir y para el QR) ----------
+  async function lamina(){
+    await fuentes();const W=1080,cw=340,ch=425,gap=10,top=190,H=top+3*(ch+gap)+110;const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+    g.fillStyle='#05070A';g.fillRect(0,0,W,H);
+    g.fillStyle='#8FB8FF';g.font='500 22px "JetBrains Mono"';g.fillText('MISMO PRODUCTO · 3 IAs',30,58);
+    g.fillStyle='#F3F6FA';g.font='700 46px "Space Grotesk"';g.fillText(($('inProd').value.trim()||'Tu producto').slice(0,34),30,112);
+    const cols=[['claude','CLAUDE'],['gemini','GEMINI'],['flare','FLARE LAB']];
+    cols.forEach(([m,n],ci)=>{g.fillStyle=m==='flare'?'#FF8A4C':'#C3CCD9';g.font='700 22px "JetBrains Mono"';g.fillText(n,30+ci*(cw+gap)+4,top-16)});
+    const cargar=u=>new Promise(ok=>{const i=new Image();i.onload=()=>ok(i);i.onerror=()=>ok(null);i.src=u});
+    for(let r=0;r<3;r++)for(let ci=0;ci<3;ci++){const[m]=cols[ci],t=TIPOS[r].k,x=30+ci*(cw+gap),y=top+r*(ch+gap);
+      const u=existe(m,t)?src(m,t):null;g.fillStyle=t==='catalogo'?'#fff':'#0D121A';g.fillRect(x,y,cw,ch);
+      const i=u?await cargar(u):null;
+      if(i){const k=t==='catalogo'?Math.min(cw/i.width,ch/i.height):Math.max(cw/i.width,ch/i.height),w=i.width*k,h=i.height*k;g.save();g.beginPath();g.rect(x,y,cw,ch);g.clip();g.drawImage(i,x+(cw-w)/2,y+(ch-h)/2,w,h);g.restore()}
+      else{g.fillStyle='#0D121A';g.fillRect(x,y,cw,ch);g.fillStyle='#FF4D5E';g.font='700 18px "JetBrains Mono"';g.textAlign='center';g.fillText(existe(m,t)?'NO LLEGÓ':'NO GENERA',x+cw/2,y+ch/2-6);g.fillStyle='#6F7B8D';g.font='500 15px "JetBrains Mono"';g.fillText(existe(m,t)?'A TIEMPO':'IMÁGENES',x+cw/2,y+ch/2+20);g.textAlign='left'}
+      if(m==='flare'){g.strokeStyle='#FF5A1F';g.lineWidth=4;g.strokeRect(x+2,y+2,cw-4,ch-4)}
+      if(ci===0){g.save();g.fillStyle='rgba(5,7,10,.75)';g.fillRect(x,y,150,34);g.fillStyle='#F3F6FA';g.font='500 16px "JetBrains Mono"';g.fillText(TIPOS[r].n.toUpperCase(),x+10,y+23);g.restore()}}
+    g.fillStyle='#6F7B8D';g.font='500 17px "JetBrains Mono"';g.fillText('Claude: tu foto recortada · Gemini: 1 foto y pedido normal · Flare Lab: método',30,H-58);
+    sello(g,W,H);return await aBlob(c,.9)}
+
+  // ---------- datos (Google Sheet) → QR ----------
+  const validos=()=>{const n=$('lNom').value.trim().length>=2,t=$('lTel').value.replace(/\D/g,'').length>=10,m=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('lMail').value.trim());return n&&(t||m)&&$('lOk').checked};
+  ['lNom','lTel','lMail','lOk'].forEach(x=>$(x).addEventListener('input',()=>$('btLead').disabled=!validos()));
+  $('btLead').onclick=async()=>{
+    $('btLead').disabled=true;$('btLead').textContent='Preparando tus fotos…';$('leadErr').classList.add('hide');
     try{
+      const lam=await lamina();blob.lamina=lam;
       if(prueba())linkFotos='https://flarelab.io';
-      else{const fd=new FormData();ks.forEach((t,i)=>{fd.append('f'+i,wm[t.k],'flarelab_'+t.k+'.jpg');fd.append('n'+i,t.n)});fd.append('marca',$('inProd').value.trim());linkFotos=(await api('/guardar',{method:'POST',body:fd})).url}
-      if(window.QRCode)new QRCode($('qr'),{text:linkFotos,width:460,height:460,colorDark:'#0A0D14',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+      else{const fd=new FormData();let i=0;
+        fd.append('f'+i,lam,'flarelab_comparativa.jpg');fd.append('n'+i,'Comparativa: Claude vs Gemini vs Flare Lab');i++;
+        TIPOS.forEach(t=>{if(blob[t.k]){fd.append('f'+i,blob[t.k],'flarelab_'+t.k+'.jpg');fd.append('n'+i,t.n+' · Flare Lab');i++}});
+        fd.append('marca',$('inProd').value.trim());linkFotos=(await api('/guardar',{method:'POST',body:fd})).url;
+        await api('/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre:$('lNom').value,telefono:$('lTel').value,correo:$('lMail').value,producto:$('inProd').value,vendedor:vend,link:linkFotos,acepta:$('lOk').checked})});
+      }
+      $('lead').classList.add('hide');$('llevar').classList.remove('hide');$('qr').innerHTML='';
+      if(window.QRCode)new QRCode($('qr'),{text:linkFotos,width:460,height:460,colorDark:'#05070A',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
       $('qrLink').textContent=prueba()?'Modo prueba: el QR real abre sus fotos':linkFotos;
-    }catch(e){$('qrLink').textContent='No se pudo crear el link ('+e.message+'). Usa "Compartir" en cada foto.'}}
-  $('btWa').onclick=()=>{let n=$('inTel').value.replace(/\D/g,'');if(n.length===10)n='52'+n;
-    const t=encodeURIComponent('¡Hola! Estas son las fotos de tu producto que hicimos en vivo'+(vend?' ('+vend+', Flare Lab)':' en Flare Lab')+': '+linkFotos);window.open('https://wa.me/'+n+'?text='+t,'_blank')};
-  $('btCopiar').onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(linkFotos).then(()=>{$('btCopiar').textContent='Link copiado'})};
+      setTimeout(()=>$('llevar').scrollIntoView({behavior:'smooth',block:'center'}),60);
+    }catch(e){$('leadErr').textContent='No se pudo guardar ('+e.message+'). Intenta otra vez.';$('leadErr').classList.remove('hide');$('btLead').disabled=false}
+    $('btLead').textContent='Generar mi QR'};
+  $('btWa').onclick=()=>{let n=$('lTel').value.replace(/\D/g,'');if(n.length===10)n='52'+n;
+    const t=encodeURIComponent('¡Hola '+$('lNom').value.trim().split(' ')[0]+'! Aquí está tu comparativa Claude vs Gemini vs Flare Lab y tus fotos'+(vend?' ('+vend+', Flare Lab)':'')+': '+linkFotos);window.open('https://wa.me/'+n+'?text='+t,'_blank')};
+  $('btCopiar').onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(linkFotos).then(()=>{$('btCopiar').textContent='✓'})};
 
-  // zoom y compartir
-  function verZoom(k){$('vImg').src=listos[k];$('vTit').textContent=TIPOS.find(t=>t.k===k).n;$('vScroll').classList.remove('z');$('viewer').classList.add('on')}
+  // ---------- zoom y compartir ----------
+  $('btZoom').onclick=()=>{const u=src('flare',tab);if(!u)return;$('vImg').src=u;$('vTit').textContent='FLARE LAB · '+TIPOS.find(t=>t.k===tab).n.toUpperCase();$('vScroll').classList.remove('z');$('viewer').classList.add('on')};
   $('vCerrar').onclick=()=>$('viewer').classList.remove('on');
   let ult=0;$('vScroll').addEventListener('click',e=>{const n=Date.now();if(n-ult<350){const sc=$('vScroll');sc.classList.toggle('z');if(sc.classList.contains('z')){const r=sc.getBoundingClientRect();requestAnimationFrame(()=>{sc.scrollLeft=(sc.scrollWidth-r.width)*((e.clientX-r.left)/r.width);sc.scrollTop=(sc.scrollHeight-r.height)*((e.clientY-r.top)/r.height)})}}ult=n});
-  async function compartir(k){const t=TIPOS.find(x=>x.k===k);try{const b=wm[k]||await (await fetch(listos[k])).blob();const f=new File([b],'flarelab_'+k+'.jpg',{type:'image/jpeg'});
-      if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Foto de '+t.n.toLowerCase()+' · Flare Lab',text:'Hecha en vivo por Flare Lab. Agenda: https://calendly.com/alan-flarelab/30min'});return}
-      const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click()}catch(e){}}
-  $('btOtra').onclick=()=>{fotos=[null,null,null];wm={};linkFotos='';$('inProd').value='';$('inNota').value='';pintarSlots();vista('vCaptura')};
+  $('btComp').onclick=async()=>{try{const b=blob.lamina||(blob.lamina=await lamina());const f=new File([b],'flarelab_comparativa.jpg',{type:'image/jpeg'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Claude vs Gemini vs Flare Lab',text:'Mismo producto, 3 IAs. Hecho en vivo por Flare Lab.'});return}
+      const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click()}catch(e){}};
+  $('btOtra').onclick=()=>{fotos=[null,null,null];blob={};img={};linkFotos='';['inProd','inNota','lNom','lTel','lMail'].forEach(x=>$(x).value='');cat='';pintarCats();$('btLead').disabled=true;pintarSlots();vista('vCaptura')};
 
-  // modo ensayo: index.html?prueba&auto=res
-  if(qs.has('auto')){fetch('demo/catalogo.jpg').then(r=>r.blob()).then(b=>{fotos=[{blob:b,url:'demo/catalogo.jpg'},null,null];$('inProd').value='botín chelsea de nobuk';pintarSlots();if(qs.get('auto')==='res')$('btCrear').click()})}
+  // ensayo: index.html?prueba&auto=res
+  if(qs.has('auto')){fetch('demo/tufoto.jpg').then(r=>r.blob()).then(b=>{fotos=[{blob:b,url:'demo/tufoto.jpg'},null,null];$('inProd').value='bota de piel';pintarSlots();if(qs.get('auto')==='res')$('btCrear').click()})}
   if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 })();
 </script>
