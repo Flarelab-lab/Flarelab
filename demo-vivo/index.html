@@ -57,9 +57,31 @@ input.req{border-color:rgba(255,90,31,.6)}
 .slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .slot .x{position:absolute;top:5px;right:5px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(5,7,10,.85);color:#fff;z-index:2}
 .slot .tg{position:absolute;left:5px;bottom:5px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.06em;background:rgba(5,7,10,.85);padding:3px 6px;border-radius:4px;color:var(--hi)}
-.cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
-.cats button{flex:none;border:1px solid var(--line2);background:rgba(5,7,10,.7);color:var(--txt);border-radius:999px;padding:8px 13px;font-size:13.5px;cursor:pointer}
+.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.cats.t4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cats button{border:1px solid var(--line2);background:rgba(5,7,10,.7);color:var(--txt);border-radius:10px;padding:10px 6px;font-size:13.5px;cursor:pointer;line-height:1.15}
 .cats button.on{border-color:var(--acc);background:rgba(77,141,255,.16);color:var(--hi)}
+.duel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dc{border:1px solid var(--line);border-radius:12px;background:rgba(5,7,10,.75);padding:6px;display:grid;gap:6px;cursor:pointer;color:var(--txt);text-align:center;font:inherit}
+.dc .dh{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--hi);font-weight:700}
+.dc.fl{border-color:rgba(255,90,31,.65);box-shadow:0 0 26px -8px rgba(255,90,31,.7)}.dc.fl .dh{color:var(--fl2)}
+.dc .di{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:#11161F;display:grid;place-items:center}
+.dc.white .di{background:#fff}.dc .di img{width:100%;height:100%;object-fit:cover}.dc.white .di img{object-fit:contain}
+.dc .di em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--bad);padding:6px;line-height:1.35}
+.dc .zi{position:absolute;right:5px;bottom:5px;width:26px;height:26px;border-radius:50%;background:rgba(5,7,10,.8);display:grid;place-items:center}
+.dc .zi svg{width:14px;height:14px}
+.dc .dr{font-family:var(--mono);font-size:10px;color:var(--mut);line-height:1.2}.dc.fl .dr{color:var(--fl2);font-weight:700}
+.leyenda{font-size:12.5px;color:var(--mut);margin:0;text-align:center;line-height:1.5}.leyenda b{color:var(--txt);font-weight:600}
+.vz{flex:1;position:relative;overflow:hidden;touch-action:none;background:#000;cursor:grab}.vz.white{background:#fff}
+.vz img{position:absolute;max-width:none;max-height:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:none}
+.vz .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:var(--mut)}
+.vzl{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:rgba(5,7,10,.75);padding:5px 9px;border-radius:8px;pointer-events:none}
+.vres{position:absolute;right:12px;top:12px;font-family:var(--mono);font-size:11px;color:#fff;background:rgba(5,7,10,.75);padding:5px 9px;border-radius:8px;pointer-events:none}
+.vsw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:10px 12px 0;background:#020305}
+.vsw button{border:1px solid var(--line2);background:var(--panel);color:var(--txt);border-radius:10px;padding:8px 2px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;display:grid;gap:2px;cursor:pointer}
+.vsw button small{font-size:9.5px;color:var(--mut);letter-spacing:0}
+.vsw button.on{border-color:var(--acc);color:var(--hi);background:rgba(77,141,255,.16)}
+.vsw button.fl{color:var(--fl2)}.vsw button.fl.on{border-color:var(--fl);background:rgba(255,90,31,.15)}
+.vsw button:disabled{opacity:.3}
 .vs3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .vs3 div{border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;background:rgba(5,7,10,.5)}
 .vs3 b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--hi)}.vs3 span{font-size:11px;color:var(--mut);line-height:1.25;display:block;margin-top:3px}
@@ -165,15 +187,16 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
     </div>
     <div class="vs3"><div><b>CLAUDE</b><span>Edita tu foto</span></div><div><b>GEMINI</b><span>Pedido normal</span></div><div class="w"><b>FLARE LAB</b><span>Método de fidelidad</span></div></div>
     <div class="field"><label>01 · ¿Qué es el producto?</label><input id="inProd" class="req" placeholder="ej. bota de piel, guantes de portero, dulce de tamarindo" maxlength="120" autocomplete="off"></div>
-    <div class="field"><label>Tipo de producto · decide el lugar de la foto</label><div class="cats" id="cats"></div></div>
-    <div class="field"><label>02 · Fotos (luz de día, producto completo)</label><div class="slots" id="slots"></div></div>
+    <div class="field"><label>02 · Tipo de producto (decide el lugar de la foto)</label><div class="cats" id="cats"></div></div>
+    <div class="field"><label>03 · Tamaño real (para que no salga más grande o más chico)</label><div class="cats t4" id="tams"></div></div>
+    <div class="field"><label>04 · Fotos (luz de día, producto completo, de preferencia en tu mano)</label><div class="slots" id="slots"></div></div>
     <p class="muted" style="margin-top:-8px">La de frente es obligatoria y es la que reciben las 3 IAs. Flare Lab usa además la de lado y la del logo.</p>
     <div class="field"><label>Marca o estilo (opcional)</label><input id="inNota" placeholder="ej. marca mexicana, minimalista, colores tierra" maxlength="200"></div>
     <button class="btn" id="btCrear" disabled>Iniciar comparativa</button>
   </section>
 
   <section id="vRes" class="hide" style="display:grid;gap:16px">
-    <div style="display:grid;gap:8px"><p class="kick" id="resKick">Procesando · en vivo</p><h2 id="resTit">3 IAs trabajando en tu producto.</h2></div>
+    <div style="display:grid;gap:8px"><p class="kick" id="resKick">Procesando · en vivo</p><h2 id="resTit">3 IAs trabajando en tu producto.</h2><p class="muted hide" id="resSub">Toca cualquier foto y acércate al logo o a la textura. <b style="color:var(--hi)">Flare Lab sigue nítido e idéntico a tu producto</b>; las otras se pixelean o cambian detalles. Eso es lo que hace que una foto venda en línea.</p></div>
 
     <div id="proc" style="display:grid;gap:14px">
       <div class="scan"><img id="scanImg" alt=""><div class="hud"><i></i><i></i><i></i><i></i><span class="t" id="hudT">ANALIZANDO PRODUCTO</span></div><div class="clock" id="clock">0:00</div></div>
@@ -183,11 +206,11 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
 
     <div id="resul" class="hide" style="display:grid;gap:12px">
       <div class="tabs" id="tabs"></div>
-      <div class="stage" id="stage"><div class="ly a" id="lyA"></div><div class="ly b" id="lyB"></div><div class="hd" id="hd"></div><span class="lb l" id="lbL"></span><span class="lb r">FLARE LAB</span><div class="flash" id="flash"></div></div>
-      <p class="muted" style="text-align:center;margin-top:-4px;font-size:12.5px">Desliza para comparar · toca una IA para cambiar</p>
-      <div class="rivals" id="rivals"></div>
-      <dl class="why" id="why"></dl>
-      <div class="acts"><button class="btn small line" id="btZoom">Ver Flare Lab con zoom</button><button class="btn small line" id="btComp">Compartir</button></div>
+      <div class="duel" id="duel"></div>
+      <p class="leyenda"><b>Claude</b> solo recorta tu foto · <b>Gemini</b> 1 foto y pedido normal · <b>Flare Lab</b> 3 fotos + método de fidelidad</p>
+      <button class="btn" id="btZoom"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>Comparar el detalle con zoom</button>
+      <p class="muted" style="text-align:center;margin-top:-4px;font-size:12.5px">Acércate al logo o a la textura y cambia de IA sin perder el zoom.</p>
+      <button class="btn small line" id="btComp">Compartir comparativa</button>
     </div>
 
     <p class="err hide" id="err"></p>
@@ -224,9 +247,10 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
 </div>
 
 <div class="viewer" id="viewer">
-  <div class="vbar"><span id="vTit"></span><button class="btn small line" style="width:auto" id="vCerrar">Cerrar</button></div>
-  <div class="vscroll" id="vScroll"><img id="vImg" alt=""></div>
-  <p class="vhint">Toca dos veces para acercar · pellizca para hacer zoom</p>
+  <div class="vbar"><span id="vTit"></span><div class="row"><button class="btn small line" style="width:auto;padding:0 12px" id="vLupa">Lupa 4×</button><button class="btn small line" style="width:auto;padding:0 12px" id="vCerrar">Cerrar</button></div></div>
+  <div class="vz" id="vz"><img id="vImg" alt="" draggable="false"><div class="none hide" id="vNone"></div><span class="vzl" id="vzl">1.0×</span><span class="vres" id="vres"></span></div>
+  <div class="vsw" id="vsw"></div>
+  <p class="vhint">Pellizca o toca dos veces para acercar · cambia de IA y el zoom se queda en el mismo punto</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -276,7 +300,10 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
     $('slots').querySelectorAll('input').forEach(inp=>inp.onchange=async e=>{const f=e.target.files[0];if(!f)return;fotos[+inp.dataset.slot]=await comprimir(f);pintarSlots()});
     $('slots').querySelectorAll('.x').forEach(b=>b.onclick=ev=>{ev.preventDefault();fotos[+b.dataset.i]=null;pintarSlots()});
     listoParaCrear()}
-  const CATS=[['','Automático'],['calzado','Calzado'],['ropa','Ropa'],['bolsa','Bolsa'],['joyeria','Joyería/reloj'],['belleza','Belleza'],['comida','Comida'],['bebida','Bebida'],['deporte','Deporte'],['electronica','Electrónica'],['hogar','Hogar'],['mascota','Mascota'],['bebe','Bebé/niños'],['otro','Otro']];
+  const CATS=[['','Automático'],['calzado','Calzado'],['ropa','Ropa'],['bolsa','Bolsa'],['joyeria','Joyería/reloj'],['belleza','Belleza'],['comida','Comida'],['bebida','Bebida'],['deporte','Deporte'],['electronica','Electrónica'],['hogar','Hogar'],['mascota','Mascota'],['juguete','Juguete/peluche'],['bebe','Bebé'],['otro','Otro']];
+  const TAMS=[['','Auto (según tu mano en la foto)'],['mano','Cabe en la mano'],['mediano','Mediano (zapato, botella, bolsa)'],['grande','Grande (mueble, aparato)']];
+  let tam='';function pintarTams(){$('tams').innerHTML=TAMS.map(([k,n])=>'<button type="button" data-k="'+k+'" class="'+(k===tam?'on':'')+'">'+n+'</button>').join('');$('tams').querySelectorAll('button').forEach(b=>b.onclick=()=>{tam=b.dataset.k;pintarTams()})}
+  pintarTams();
   let cat='';function pintarCats(){$('cats').innerHTML=CATS.map(([k,n])=>'<button type="button" data-k="'+k+'" class="'+(k===cat?'on':'')+'">'+n+'</button>').join('');$('cats').querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.k;pintarCats()})}
   pintarCats();
   $('inProd').oninput=listoParaCrear;
@@ -292,15 +319,15 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
   $('btCrear').onclick=async()=>{
     vista('vRes');fin=false;['err','cierre','llevar','lead','resul'].forEach(x=>$(x).classList.add('hide'));$('proc').classList.remove('hide');
     tareas={};estado={};img={};blob={};linkFotos='';tab='catalogo';rival='tufoto';
-    $('resKick').textContent='Procesando · en vivo';$('resTit').textContent='3 IAs trabajando en tu producto.';
-    $('scanImg').src=fotos[0].url;$('hudT').textContent='SUBIENDO FOTOS';
+    $('resKick').textContent='Procesando · en vivo';$('resSub').classList.add('hide');$('resTit').textContent='3 IAs trabajando en tu producto.';
+    $('scanImg').src=fotos[0].url;medir('tufoto',fotos[0].blob);$('hudT').textContent='SUBIENDO FOTOS';
     let i=0;$('log').textContent=LOG[0];clearInterval(logT);logT=setInterval(()=>{i=(i+1)%LOG.length;$('log').style.opacity=0;setTimeout(()=>{$('log').textContent=LOG[i];$('log').style.opacity=1},350)},6500);
     t0=Date.now();clearInterval(timer);timer=setInterval(()=>{$('clock').textContent=mmss(seg());if(!fin)pintarLanes()},1000);pintarLanes();
     try{
       if(prueba()){simular();return}
       const urls=await Promise.all(fotos.filter(Boolean).map(f=>{const fd=new FormData();fd.append('file',f.blob,'producto.jpg');return api('/subir',{method:'POST',body:fd}).then(j=>j.url)}));
       $('hudT').textContent='3 IAS GENERANDO';
-      const j=await api('/generar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls,producto:$('inProd').value.trim(),nota:$('inNota').value.trim(),categoria:cat,vendedor:vend})});
+      const j=await api('/generar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls,producto:$('inProd').value.trim(),nota:$('inNota').value.trim(),categoria:cat,tamano:tam,vendedor:vend})});
       tareas=j.tareas;todasLasClaves().forEach(k=>{if(!tareas[k])estado[k]='fail'});sondear();
     }catch(e){fallo(e.message)}
   };
@@ -318,8 +345,10 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
     try{let b=await traer(url);
       if(k==='claude_catalogo')b=await claudeFondo(b);
       else if(TIPOS.some(t=>t.k===k))b=await marca(b);
-      blob[k]=b;img[k]=URL.createObjectURL(b);estado[k]='ok';
+      blob[k]=b;img[k]=URL.createObjectURL(b);await medir(k,b);estado[k]='ok';
     }catch(e){img[k]=url;estado[k]='ok'}}
+  const dims={};async function medir(k,b){try{const u=new Uint8Array(await b.slice(0,262144).arrayBuffer()),dv=new DataView(u.buffer);if(u[0]===0x89&&u[1]===0x50){dims[k]=[dv.getUint32(16),dv.getUint32(20)];return}if(u[0]===0xFF&&u[1]===0xD8){let i=2;while(i+9<u.length){if(u[i]!==0xFF){i++;continue}const m=u[i+1];if(m>=0xC0&&m<=0xCF&&m!==0xC4&&m!==0xC8&&m!==0xCC){dims[k]=[dv.getUint16(i+7),dv.getUint16(i+5)];return}i+=2+dv.getUint16(i+2)}}}catch(e){}}
+  function resTxt(d){if(!d)return '';const m=Math.max(d[0],d[1]);return (m>=2600?'4K':m>=1700?'2K':'1K')+' · '+d[0]+'×'+d[1]}
   function fallo(m){clearInterval(timer);clearInterval(logT);$('err').textContent='No se pudo crear: '+m+'. Revisa la señal o el código (toca el indicador de arriba).';$('err').classList.remove('hide')}
   async function simular(){
     const demo={catalogo:'demo/catalogo.jpg',temporada:'demo/temporada.jpg',campana:'demo/campana.jpg',claude_catalogo:'demo/claude.png',gemini_catalogo:'demo/gemini.jpg',gemini_temporada:'demo/gemini.jpg',gemini_campana:'demo/gemini.jpg'};
@@ -336,7 +365,7 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
     let x0=tc.width,y0=tc.height,x1=0,y1=0;for(let y=0;y<tc.height;y++)for(let x=0;x<tc.width;x++)if(d[(y*tc.width+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
     if(x1<=x0||y1<=y0){x0=0;y0=0;x1=tc.width;y1=tc.height}
     const sx=x0/s,sy=y0/s,sw=(x1-x0+1)/s,sh=(y1-y0+1)/s;
-    const W=1600,H=2000,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+    const W=Math.round(Math.min(1600,Math.max(600,sw/0.74))),H=Math.round(W*1.25),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
     const bg=g.createRadialGradient(W/2,H*.38,W*.1,W/2,H*.45,H*.75);bg.addColorStop(0,'#F1EEE9');bg.addColorStop(1,'#B9B5AF');g.fillStyle=bg;g.fillRect(0,0,W,H);
     const k=Math.min(W*.74/sw,H*.58/sh),dw=sw*k,dh=sh*k,dx=(W-dw)/2,dy=H*.1+(H*.58-dh)/2;
     g.save();g.translate(0,dy*2+dh*2);g.scale(1,-1);g.globalAlpha=.16;g.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);g.restore();
@@ -364,37 +393,59 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
   // ---------- resultados: duelo con deslizador ----------
   function terminar(){
     if(fin)return;fin=true;clearInterval(timer);clearInterval(logT);pintarLanes();
-    const s=seg();$('resKick').textContent='Listo en '+mmss(s)+' min';$('resTit').innerHTML='Mismo producto. <span class="g">Compara.</span>';
+    const s=seg();$('resKick').textContent='Listo en '+mmss(s)+' min';$('resTit').innerHTML='Mismo producto. <span class="g">Acércate y compara.</span>';$('resSub').classList.remove('hide');
     $('proc').classList.add('hide');$('resul').classList.remove('hide');$('resul').classList.add('rise');
-    pintarTabs();pintar(true);
+    pintarTabs();pintarDuel();
     $('lead').classList.remove('hide');$('cierre').classList.remove('hide');creditos();
     setTimeout(()=>$('resul').scrollIntoView({behavior:'smooth',block:'start'}),80)}
   function pintarTabs(){$('tabs').innerHTML=TIPOS.map(t=>'<button data-t="'+t.k+'" class="'+(t.k===tab?'on':'')+'">'+t.n+'</button>').join('');
-    $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;pintarTabs();pintar(false)})}
+    $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;pintarTabs();pintarDuel()})}
   const src=(m,t)=>m==='tufoto'?fotos[0].url:(estado[clave(m,t)]==='ok'?img[clave(m,t)]:null);
-  function pintar(revelar){
-    const flare=src('flare',tab),blanco=tab==='catalogo';
-    $('stage').classList.toggle('white',blanco);
-    const nombre={tufoto:'TU FOTO',claude:'CLAUDE',gemini:'GEMINI',flare:'FLARE LAB'};
-    const solo=rival==='flare';
-    $('stage').classList.toggle('solo',solo);
-    const ra=solo?null:(existe(rival,tab)?src(rival,tab):'x');
-    $('lyA').innerHTML=solo?'':(ra==='x'?'<div class="none"><div><b>'+nombre[rival]+' ✕</b>Claude no genera imágenes: no puede crear escenas ni personas con tu producto.</div></div>':ra?'<img src="'+ra+'" alt="">':'<div class="none"><div><b>'+nombre[rival]+'</b>No llegó a tiempo.</div></div>');
-    $('lyB').innerHTML=flare?'<img src="'+flare+'" alt="">':'<div class="none"><div><b>FLARE LAB</b>Esta foto no salió. Toca "Otro producto" para repetir.</div></div>';
-    $('lbL').textContent=nombre[rival];
-    $('rivals').innerHTML=['tufoto','claude','gemini','flare'].map(m=>{const u=existe(m,tab)?src(m,tab):'x';
-      return '<button class="rv'+(m==='flare'?' fl':'')+(m===rival?' on':'')+(blanco&&m!=='tufoto'?' white':'')+'" data-m="'+m+'"><div class="im">'+(u==='x'?'<em>NO GENERA</em>':u?'<img src="'+u+'" alt="">':'<em>—</em>')+'</div><b>'+nombre[m]+'</b></button>'}).join('');
-    $('rivals').querySelectorAll('.rv').forEach(b=>b.onclick=()=>{rival=b.dataset.m;pintar(false)});
-    const mo=MOTORES.find(m=>m.k===rival);
-    $('why').innerHTML=(rival==='tufoto'?'<dt>TU FOTO</dt><dd>La foto que acabas de tomar con el celular.</dd>':mo&&rival!=='flare'?'<dt>'+mo.n+'</dt><dd>'+mo.como+'</dd>':'')+'<dt>FLARE LAB</dt><dd>'+MOTORES[2].como+'</dd>';
-    corte(revelar?0:50);
-    if(revelar){$('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');barrido()}}
-  let pos=50;
-  function corte(p){pos=Math.max(0,Math.min(100,p));$('lyB').style.clipPath=$('stage').classList.contains('solo')?'none':'inset(0 0 0 '+pos+'%)';$('hd').style.left=pos+'%'}
-  function barrido(){const a=performance.now();(function f(n){const t=Math.min(1,(n-a)/1400),e=1-Math.pow(1-t,3);corte(100-50*e);if(t<1)requestAnimationFrame(f)})(a);setTimeout(()=>{if(pos>50)corte(50)},1700)}
-  (function(){const st=$('stage');let on=false;const mv=e=>{const r=st.getBoundingClientRect();corte((e.clientX-r.left)/r.width*100)};
-    st.addEventListener('pointerdown',e=>{if(st.classList.contains('solo'))return;on=true;st.setPointerCapture(e.pointerId);mv(e)});
-    st.addEventListener('pointermove',e=>{if(on)mv(e)});['pointerup','pointercancel'].forEach(ev=>st.addEventListener(ev,()=>on=false))})();
+  const NOMBRE={tufoto:'TU FOTO',claude:'CLAUDE',gemini:'GEMINI',flare:'FLARE LAB'};
+  const dimsDe=(m,t)=>m==='tufoto'?dims.tufoto:dims[clave(m,t)];
+  const LUPA='<span class="zi"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M15.5 15.5L21 21" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></span>';
+  // tarjetas: las 3 IAs lado a lado, con su resolución real; tocar una abre el visor con zoom
+  function pintarDuel(){
+    const blanco=tab==='catalogo';
+    $('duel').innerHTML=['claude','gemini','flare'].map(m=>{const ok=existe(m,tab),u=ok?src(m,tab):null;
+      const cuerpo=!ok?'<em>NO GENERA IMÁGENES<br>Claude no crea escenas ni personas</em>':u?'<img src="'+u+'" alt="">'+LUPA:'<em>NO LLEGÓ A TIEMPO</em>';
+      return '<button type="button" class="dc'+(m==='flare'?' fl':'')+(blanco?' white':'')+'" data-m="'+m+'"'+(u?'':' disabled')+'><span class="dh">'+NOMBRE[m]+'</span><div class="di">'+cuerpo+'</div><span class="dr">'+(u?resTxt(dimsDe(m,tab)):'—')+'</span></button>'}).join('');
+    $('duel').querySelectorAll('.dc:not([disabled])').forEach(b=>b.onclick=()=>vAbrir(b.dataset.m))}
+
+  // visor con zoom real: la imagen se dibuja a su resolución verdadera (Flare 4K se ve nítida, Gemini 1K se pixelea)
+  // y al cambiar de IA se conserva el zoom y el punto (CX, CY relativos)
+  let vm='flare',Z=1,CX=.5,CY=.5,bw=0,bh=0;
+  const VZ=()=>$('vz').getBoundingClientRect();
+  function vAbrir(m){vm=m;Z=1;CX=.5;CY=.5;$('viewer').classList.add('on');vCargar()}
+  function vCargar(){
+    const u=existe(vm,tab)?src(vm,tab):null;$('vz').classList.toggle('white',tab==='catalogo');
+    $('vTit').textContent=NOMBRE[vm]+' · '+TIPOS.find(t=>t.k===tab).n.toUpperCase();
+    $('vres').textContent=u?resTxt(dimsDe(vm,tab)):'';
+    $('vsw').innerHTML=['tufoto','claude','gemini','flare'].map(m=>{const ok=existe(m,tab)&&src(m,tab);
+      return '<button type="button" class="'+(m==='flare'?'fl ':'')+(m===vm?'on':'')+'" data-m="'+m+'"'+(ok?'':' disabled')+'>'+NOMBRE[m]+'<small>'+(ok?(resTxt(dimsDe(m,tab)).split(' · ')[0]||'·'):'✕')+'</small></button>'}).join('');
+    $('vsw').querySelectorAll('button:not([disabled])').forEach(b=>b.onclick=()=>{vm=b.dataset.m;vCargar()});
+    if(!u){$('vImg').style.display='none';$('vNone').textContent=vm==='claude'?'Claude no genera imágenes: no puede crear escenas ni personas.':'Esta foto no llegó a tiempo.';$('vNone').classList.remove('hide');return}
+    $('vNone').classList.add('hide');$('vImg').style.display='';
+    const im=$('vImg');im.onload=()=>{vFit();vLay()};im.src=u;if(im.complete&&im.naturalWidth){vFit();vLay()}}
+  function vFit(){const r=VZ(),im=$('vImg');if(!im.naturalWidth)return;const k=Math.min(r.width/im.naturalWidth,r.height/im.naturalHeight);bw=im.naturalWidth*k;bh=im.naturalHeight*k}
+  function vLay(){if(!bw)return;const r=VZ(),w=bw*Z,h=bh*Z;let l=r.width/2-CX*w,t=r.height/2-CY*h;
+    l=w<=r.width?(r.width-w)/2:Math.min(0,Math.max(r.width-w,l));t=h<=r.height?(r.height-h)/2:Math.min(0,Math.max(r.height-h,t));
+    CX=(r.width/2-l)/w;CY=(r.height/2-t)/h;const s=$('vImg').style;s.width=w+'px';s.height=h+'px';s.left=l+'px';s.top=t+'px';$('vzl').textContent=Z.toFixed(1)+'×'}
+  function vZoom(px,py,nz){if(!bw)return;const r=VZ(),ox=px-r.left-r.width/2,oy=py-r.top-r.height/2,ix=CX+ox/(bw*Z),iy=CY+oy/(bh*Z);
+    Z=Math.max(1,Math.min(10,nz));CX=ix-ox/(bw*Z);CY=iy-oy/(bh*Z);vLay()}
+  (function(){const el=$('vz'),P=new Map();let pin=null,tap=0,tx=0,ty=0,mov=0;
+    el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);P.set(e.pointerId,{x:e.clientX,y:e.clientY});mov=0;
+      if(P.size===2){const[a,b]=[...P.values()];pin={d:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),z:Z}}});
+    el.addEventListener('pointermove',e=>{const pr=P.get(e.pointerId);if(!pr)return;P.set(e.pointerId,{x:e.clientX,y:e.clientY});mov+=Math.abs(e.clientX-pr.x)+Math.abs(e.clientY-pr.y);
+      if(P.size===1&&bw){CX-=(e.clientX-pr.x)/(bw*Z);CY-=(e.clientY-pr.y)/(bh*Z);vLay()}
+      else if(P.size===2&&pin){const[a,b]=[...P.values()];vZoom((a.x+b.x)/2,(a.y+b.y)/2,pin.z*Math.hypot(a.x-b.x,a.y-b.y)/pin.d)}});
+    const fin=e=>{if(!P.has(e.pointerId))return;P.delete(e.pointerId);if(P.size<2)pin=null;
+      if(e.type==='pointerup'&&P.size===0&&mov<12){const n=Date.now();if(n-tap<320&&Math.hypot(e.clientX-tx,e.clientY-ty)<40){vZoom(e.clientX,e.clientY,Z>1.5?1:4);tap=0}else{tap=n;tx=e.clientX;ty=e.clientY}}};
+    ['pointerup','pointercancel'].forEach(v=>el.addEventListener(v,fin));
+    el.addEventListener('wheel',e=>{e.preventDefault();vZoom(e.clientX,e.clientY,Z*(e.deltaY<0?1.25:0.8))},{passive:false});
+    addEventListener('resize',()=>{if($('viewer').classList.contains('on')){vFit();vLay()}})})();
+  $('vLupa').onclick=()=>{const r=VZ();vZoom(r.left+r.width/2,r.top+r.height/2,Z>=3.9?1:4)};
+  window.__vAbrir=vAbrir;window.__vZoom=vZoom;
 
   // ---------- comparativa en una sola imagen (para compartir y para el QR) ----------
   async function lamina(){
@@ -440,13 +491,12 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
   $('btCopiar').onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(linkFotos).then(()=>{$('btCopiar').textContent='✓'})};
 
   // ---------- zoom y compartir ----------
-  $('btZoom').onclick=()=>{const u=src('flare',tab);if(!u)return;$('vImg').src=u;$('vTit').textContent='FLARE LAB · '+TIPOS.find(t=>t.k===tab).n.toUpperCase();$('vScroll').classList.remove('z');$('viewer').classList.add('on')};
+  $('btZoom').onclick=()=>vAbrir('flare');
   $('vCerrar').onclick=()=>$('viewer').classList.remove('on');
-  let ult=0;$('vScroll').addEventListener('click',e=>{const n=Date.now();if(n-ult<350){const sc=$('vScroll');sc.classList.toggle('z');if(sc.classList.contains('z')){const r=sc.getBoundingClientRect();requestAnimationFrame(()=>{sc.scrollLeft=(sc.scrollWidth-r.width)*((e.clientX-r.left)/r.width);sc.scrollTop=(sc.scrollHeight-r.height)*((e.clientY-r.top)/r.height)})}}ult=n});
   $('btComp').onclick=async()=>{try{const b=blob.lamina||(blob.lamina=await lamina());const f=new File([b],'flarelab_comparativa.jpg',{type:'image/jpeg'});
       if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Claude vs Gemini vs Flare Lab',text:'Mismo producto, 3 IAs. Hecho en vivo por Flare Lab.'});return}
       const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click()}catch(e){}};
-  $('btOtra').onclick=()=>{fotos=[null,null,null];blob={};img={};linkFotos='';['inProd','inNota','lNom','lTel','lMail'].forEach(x=>$(x).value='');cat='';pintarCats();$('btLead').disabled=true;pintarSlots();vista('vCaptura')};
+  $('btOtra').onclick=()=>{fotos=[null,null,null];blob={};img={};linkFotos='';['inProd','inNota','lNom','lTel','lMail'].forEach(x=>$(x).value='');cat='';pintarCats();tam='';pintarTams();$('btLead').disabled=true;pintarSlots();vista('vCaptura')};
 
   // ensayo: index.html?prueba&auto=res
   if(qs.has('auto')){fetch('demo/tufoto.jpg').then(r=>r.blob()).then(b=>{fotos=[{blob:b,url:'demo/tufoto.jpg'},null,null];$('inProd').value='bota de piel';pintarSlots();if(qs.get('auto')==='res')$('btCrear').click()})}
