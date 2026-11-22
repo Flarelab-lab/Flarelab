@@ -245,7 +245,7 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
     <button class="btn line" id="btOtra">Otro producto</button>
   </section>
 
-  <footer>Flare Lab · fotos de producto con IA</footer>
+  <footer>Flare Lab · fotos de producto con IA · <span id="ver">v7</span></footer>
 </div>
 
 <div class="viewer" id="viewer">
@@ -503,7 +503,12 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
 
   // ensayo: index.html?prueba&auto=res
   if(qs.has('auto')){fetch('demo/tufoto.jpg').then(r=>r.blob()).then(b=>{fotos=[{blob:b,url:'demo/tufoto.jpg'},null,null];$('inProd').value='bota de piel';pintarSlots();if(qs.get('auto')==='res')$('btCrear').click()})}
-  if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+  // actualización automática: busca versión nueva al abrir y al volver a la app; si hay, recarga una vez
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    const hadCtrl=!!navigator.serviceWorker.controller;let recargado=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtrl&&!recargado){recargado=true;location.reload()}});
+    navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update()})}).catch(()=>{});
+  }
 })();
 </script>
 </body>
