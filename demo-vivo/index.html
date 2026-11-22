@@ -220,6 +220,7 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
       <h2>Tus fotos y la comparativa, <span class="g">directo a tu celular</span>.</h2>
       <p class="muted">Te las mandamos con una propuesta para tu catálogo completo.</p>
       <div class="field"><label>Nombre</label><input id="lNom" autocomplete="name" maxlength="80"></div>
+      <div class="field"><label>Empresa o marca</label><input id="lEmp" autocomplete="organization" maxlength="100" placeholder="ej. Calzado Dorothy, mi tienda en línea"></div>
       <div class="field"><label>WhatsApp</label><input id="lTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" maxlength="16"></div>
       <div class="field"><label>Correo</label><input id="lMail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" maxlength="120"></div>
       <label class="check"><input type="checkbox" id="lPromo"><span>Quiero recibir promociones y novedades de Flare Lab por WhatsApp y correo <b>(opcional)</b>.</span></label>
@@ -480,7 +481,7 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
         fd.append('f'+i,lam,'flarelab_comparativa.jpg');fd.append('n'+i,'Comparativa: Claude vs Gemini vs Flare Lab');i++;
         TIPOS.forEach(t=>{if(blob[t.k]){fd.append('f'+i,blob[t.k],'flarelab_'+t.k+'.jpg');fd.append('n'+i,t.n+' · Flare Lab');i++}});
         fd.append('marca',$('inProd').value.trim());linkFotos=(await api('/guardar',{method:'POST',body:fd})).url;
-        await api('/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre:$('lNom').value,telefono:$('lTel').value,correo:$('lMail').value,producto:$('inProd').value,vendedor:vend,link:linkFotos,promos:$('lPromo').checked})});
+        await api('/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre:$('lNom').value,empresa:$('lEmp').value,telefono:$('lTel').value,correo:$('lMail').value,producto:$('inProd').value,vendedor:vend,link:linkFotos,promos:$('lPromo').checked})});
       }
       $('lead').classList.add('hide');$('llevar').classList.remove('hide');$('qr').innerHTML='';
       if(window.QRCode)new QRCode($('qr'),{text:linkFotos,width:460,height:460,colorDark:'#05070A',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
@@ -498,7 +499,7 @@ footer{text-align:center;color:#46505F;font-family:var(--mono);font-size:10px;le
   $('btComp').onclick=async()=>{try{const b=blob.lamina||(blob.lamina=await lamina());const f=new File([b],'flarelab_comparativa.jpg',{type:'image/jpeg'});
       if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Claude vs Gemini vs Flare Lab',text:'Mismo producto, 3 IAs. Hecho en vivo por Flare Lab.'});return}
       const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click()}catch(e){}};
-  $('btOtra').onclick=()=>{fotos=[null,null,null];blob={};img={};linkFotos='';['inProd','inNota','lNom','lTel','lMail'].forEach(x=>$(x).value='');$('lPromo').checked=false;cat='';pintarCats();tam='';pintarTams();$('btLead').disabled=true;pintarSlots();vista('vCaptura')};
+  $('btOtra').onclick=()=>{fotos=[null,null,null];blob={};img={};linkFotos='';['inProd','inNota','lNom','lEmp','lTel','lMail'].forEach(x=>$(x).value='');$('lPromo').checked=false;cat='';pintarCats();tam='';pintarTams();$('btLead').disabled=true;pintarSlots();vista('vCaptura')};
 
   // ensayo: index.html?prueba&auto=res
   if(qs.has('auto')){fetch('demo/tufoto.jpg').then(r=>r.blob()).then(b=>{fotos=[{blob:b,url:'demo/tufoto.jpg'},null,null];$('inProd').value='bota de piel';pintarSlots();if(qs.get('auto')==='res')$('btCrear').click()})}
